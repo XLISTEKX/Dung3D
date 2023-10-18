@@ -1,40 +1,66 @@
 using Godot;
 using System;
 
-public partial class PlayerMovement : Node3D
+public partial class PlayerMovement : CharacterBody3D
 {
 	[Export] Camera3D camera;
+	[Export] NavigationAgent3D navAgent;
 	[Export] float speed = 1f;
+	
+	Vector3 destination;
+	bool movePlayer;
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector3 directionZ = GlobalPosition - camera.GlobalPosition;
-		directionZ.Y = 0;
-		directionZ = directionZ.Normalized();
-		Vector3 directionX = camera.GlobalTransform.Basis.X;
-		directionX.Y = 0;
-		directionX = directionX.Normalized();
+		base._PhysicsProcess(delta);
 		
-		Vector3 position = Position;
-		
-		if(Input.IsActionPressed("Forward"))
+		if(navAgent.IsNavigationFinished())
 		{
-			position += directionZ * speed * (float)delta;
+			return;
 		}
-		if(Input.IsActionPressed("Back"))
-		{
-			position -= directionZ * speed * (float)delta;
-		}
-		if(Input.IsActionPressed("Right"))
-		{
-			position += directionX * speed * (float)delta;
-		}
-		if(Input.IsActionPressed("Left"))
-		{
-			position -= directionX * speed * (float)delta;
-		}
-		
-		Position = position;
+
+		MovePlayer();
 	}
 
+	public override void _Input(InputEvent @event)
+	{
+		if(@event is InputEventMouseButton press)
+		{
+			if(!press.Pressed)
+			{
+				destination = ScreenPointToRay(press.Position);
+				destination.Y = Position.Y;
+				
+				movePlayer = true;
+				
+				navAgent.TargetPosition = destination;
+			}
+		}
+	}
+	
+	void MovePlayer()
+	{
+		Vector3 currentPosition = GlobalTransform.Origin;
+		Vector3 nextPathPosition = navAgent.GetNextPathPosition();
+		
+		Vector3 newVelocity = (nextPathPosition - currentPosition).Normalized();
+		newVelocity *= speed;
+		GD.Print(newVelocity);
+		Velocity = newVelocity;
+		MoveAndSlide();
+	}
+	
+	public Vector3 ScreenPointToRay(Vector2 position)
+	{
+		var SpaceState = GetWorld3D().DirectSpaceState;
+		
+		var rayOrigin = camera.ProjectRayOrigin(position);
+		var rayEnd = rayOrigin + camera.ProjectRayNormal(position) * 2000;
+		var query = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
+		
+		var rayArray = SpaceState.IntersectRay(query);
+		
+		return (Vector3) rayArray["position"];
+
+	}
 }

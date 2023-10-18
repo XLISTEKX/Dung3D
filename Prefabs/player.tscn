@@ -1,29 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bikgsyhi48bf3"]
+[gd_scene load_steps=4 format=3 uid="uid://bikgsyhi48bf3"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.cs" id="1_hymbc"]
-[ext_resource type="Script" path="res://Scripts/CameraRotator.cs" id="2_r8qv2"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_hlaf1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_px5he"]
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("camera")]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hlaf1"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("camera", "navAgent")]
 script = ExtResource("1_hymbc")
 camera = NodePath("CameraRotator/Camera3D")
-speed = 2.0
+navAgent = NodePath("NavigationAgent3D")
+speed = 5.0
 
-[node name="Model" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_hlaf1")
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_px5he")
 
 [node name="CameraRotator" type="Node3D" parent="."]
-script = ExtResource("2_r8qv2")
-rotationSpeed = 0.2
 
 [node name="Camera3D" type="Camera3D" parent="CameraRotator"]
 transform = Transform3D(-1, -1.0677e-07, 1.0677e-07, 0, 0.707107, 0.707107, -1.50996e-07, 0.707107, -0.707107, 0, 10, -10)
 current = true
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_hlaf1")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.7
+target_desired_distance = 0.1
