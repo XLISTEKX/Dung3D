@@ -1,3 +1,50 @@
-[gd_scene format=3 uid="uid://b3ra6chicawpd"]
+[gd_scene load_steps=8 format=3 uid="uid://b3ra6chicawpd"]
+
+[ext_resource type="PackedScene" uid="uid://bikgsyhi48bf3" path="res://Prefabs/player.tscn" id="1_72yns"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l0b3m"]
+sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
+sky_horizon_color = Color(0.646078, 0.655975, 0.670505, 1)
+ground_horizon_color = Color(0.646078, 0.655975, 0.670505, 1)
+
+[sub_resource type="Sky" id="Sky_k5c0k"]
+sky_material = SubResource("ProceduralSkyMaterial_l0b3m")
+
+[sub_resource type="Environment" id="Environment_tsxeu"]
+background_mode = 2
+sky = SubResource("Sky_k5c0k")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ekcn7"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nl7aa"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_v8nd0"]
 
 [node name="TestSite" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tsxeu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_ekcn7")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_nl7aa")
+
+[node name="Player" parent="." instance=ExtResource("1_72yns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73621, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45157, 0.651539, 2.39581)
+mesh = SubResource("BoxMesh_v8nd0")
