@@ -44,6 +44,7 @@ shape = SubResource("WorldBoundaryShape3D_nl7aa")
 
 [node name="Player" parent="." instance=ExtResource("1_72yns")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73621, 0)
+camera = null
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45157, 0.651539, 2.39581)
