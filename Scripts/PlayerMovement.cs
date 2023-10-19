@@ -4,6 +4,8 @@ public partial class PlayerMovement : CharacterBody3D
 {
 	[Export] Camera3D camera;
 	[Export] float movementSpeed = 1f, runningSpeed = 1f;
+	
+	Node3D model;
 
 	Vector3 forward, left;
 
@@ -17,6 +19,8 @@ public partial class PlayerMovement : CharacterBody3D
 		forward = tempVector.Normalized();
 		
 		left = camera.GlobalTransform.Basis.X.Normalized();
+		
+		model = GetChild<Node3D>(0);
 	}
 
 
@@ -33,4 +37,31 @@ public partial class PlayerMovement : CharacterBody3D
 
 		MoveAndSlide();
 	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if(@event is InputEventMouseMotion motion)
+		{
+			Vector3 tempVector = ScreenToWorldPoint(motion.Position);
+			tempVector.Y = 0;
+
+			model.LookAt(tempVector);
+			model.Rotation = new(0, model.Rotation.Y + Mathf.Pi, 0);
+		}
+	}
+
+
+	public Vector3 ScreenToWorldPoint(Vector2 position)
+	{
+		var SpaceState = GetWorld3D().DirectSpaceState;
+		
+		var rayOrigin = camera.ProjectRayOrigin(position);
+		var rayEnd = rayOrigin + camera.ProjectRayNormal(position) * 1000;
+		var querry = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
+		
+		var rayArray = SpaceState.IntersectRay(querry);
+		
+		return (Vector3) rayArray["position"];
+	}
+	
 }
