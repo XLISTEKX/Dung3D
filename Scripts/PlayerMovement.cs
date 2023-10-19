@@ -30,6 +30,9 @@ public partial class PlayerMovement : CharacterBody3D
 		
 		Vector3 moveDirection = left * (Input.GetActionStrength("Right") - Input.GetActionStrength("Left")) + forward * (Input.GetActionStrength("Back") - Input.GetActionStrength("Forward"));
 
+		if(moveDirection != Vector3.Zero)
+			RotatePlayer(moveDirection + GlobalPosition);
+		
 		moveDirection *= movementSpeed + (Input.GetActionStrength("Sprint") * runningSpeed);
 		moveDirection.Y -= 5;
 		
@@ -40,15 +43,17 @@ public partial class PlayerMovement : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
-		if(@event is InputEventMouseMotion motion)
+		if(@event is InputEventMouseButton press && press.Pressed)
 		{
-			Vector3 tempVector = ScreenToWorldPoint(motion.Position);
-			tempVector.Y = 0;
-
-			model.LookAt(tempVector);
-			
-			model.Rotation = new(0,model.Rotation.Y + Mathf.Pi, 0);
+			RotatePlayer(ScreenToWorldPoint(press.Position));
 		}
+	}
+	
+	void RotatePlayer(Vector3 vectorToLook)
+	{
+		model.LookAt(vectorToLook);
+			
+		model.Rotation = new(0,model.Rotation.Y + Mathf.Pi, 0);
 	}
 
 
