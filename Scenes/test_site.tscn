@@ -47,7 +47,7 @@ collision_mask = 2
 shape = SubResource("WorldBoundaryShape3D_nl7aa")
 
 [node name="Player" parent="." instance=ExtResource("1_72yns")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01987, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0183783, 1.00853, 0.00393891)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11629, 0.470518, 2.39581)

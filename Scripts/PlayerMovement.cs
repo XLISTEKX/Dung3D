@@ -46,7 +46,8 @@ public partial class PlayerMovement : CharacterBody3D
 			tempVector.Y = 0;
 
 			model.LookAt(tempVector);
-			model.Rotation = new(0, model.Rotation.Y + Mathf.Pi, 0);
+			
+			model.Rotation = new(0,model.Rotation.Y + Mathf.Pi, 0);
 		}
 	}
 
