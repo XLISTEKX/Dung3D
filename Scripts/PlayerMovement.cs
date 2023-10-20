@@ -56,10 +56,6 @@ public partial class PlayerMovement : CharacterBody3D
 	
 	void RotatePlayer(Vector3 vectorToLook, float delta = 1)
 	{
-		// model.LookAt(vectorToLook, null, true);
-
-		// model.Rotation = new(0,model.Rotation.Y, 0);
-		
 		Vector3 look = vectorToLook - model.GlobalPosition;
 		look.Y = 0;
 		
