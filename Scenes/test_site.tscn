@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b3ra6chicawpd"]
 
-[ext_resource type="PackedScene" uid="uid://bikgsyhi48bf3" path="res://Prefabs/player.tscn" id="1_72yns"]
+[ext_resource type="PackedScene" uid="uid://bikgsyhi48bf3" path="res://Prefabs/player.tscn" id="2_obq2u"]
 [ext_resource type="PackedScene" uid="uid://bf13ay8l1ihku" path="res://Prefabs/FPS_Counter.tscn" id="2_tyqye"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l0b3m"]
@@ -46,9 +46,6 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_nl7aa")
 
-[node name="Player" parent="." instance=ExtResource("1_72yns")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01987, 0)
-
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11629, 0.470518, 2.39581)
 mesh = SubResource("BoxMesh_v8nd0")
@@ -61,3 +58,5 @@ shape = SubResource("BoxShape3D_20kpl")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Panel" parent="CanvasLayer" instance=ExtResource("2_tyqye")]
+
+[node name="proto-gltf" parent="." instance=ExtResource("2_obq2u")]

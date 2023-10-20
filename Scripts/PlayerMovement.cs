@@ -3,12 +3,16 @@ using Godot;
 public partial class PlayerMovement : CharacterBody3D
 {
 	[Export] Camera3D camera;
-	[Export] float movementSpeed = 1f, runningSpeed = 1f;
-	[Export] float rotationSpeed = 3f;
+	[Export] AnimationTree tree;
+	[Export] float movementSpeed = 4f, runningSpeed = 2.5f;
+	[Export] float rotationSpeed = 10f;
 	
 	Node3D model;
 
 	Vector3 forward, left, rotationDirection;
+
+	private bool isIdle, isRunning, isSprinting;
+	//For animation mostly
 
 	public override void _Ready()
 	{
@@ -34,7 +38,7 @@ public partial class PlayerMovement : CharacterBody3D
 		if(moveDirection != Vector3.Zero)
 		{
 			rotationDirection = moveDirection + GlobalPosition;
-		}
+		} 
 		
 		RotatePlayer(rotationDirection, (float)delta);
 		
@@ -42,8 +46,30 @@ public partial class PlayerMovement : CharacterBody3D
 		moveDirection.Y -= 5;
 		
 		Velocity = moveDirection;
-		
+
+		if((left * (Input.GetActionStrength("Right") - Input.GetActionStrength("Left")) + forward * (Input.GetActionStrength("Back") - Input.GetActionStrength("Forward"))) != Vector3.Zero){
+			//^ this has been copied from init of Vector3 moveDirection
+			isIdle = false;
+			if(Input.GetActionStrength("Sprint") != 0){
+				isRunning = false;
+				isSprinting = true;
+			}
+			else
+			{
+			isSprinting = false;
+			isRunning = true;
+			}
+			//oopsies, a nested if statement!
+		}
+		else
+		{
+			isSprinting = false;
+			isRunning = false;
+			isIdle = true;
+		}
+
 		MoveAndSlide();
+		HandleAnimations();
 	}
 
 	public override void _Input(InputEvent @event)
@@ -76,5 +102,11 @@ public partial class PlayerMovement : CharacterBody3D
 		
 		return (Vector3) rayArray["position"];
 	}
-	
+
+	private void HandleAnimations()
+	{
+		tree.Set("parameters/conditions/idle", isIdle);
+		tree.Set("parameters/conditions/running", isRunning);
+		tree.Set("parameters/conditions/sprinting", isSprinting);
+	}
 }
