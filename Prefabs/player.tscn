@@ -13,6 +13,7 @@ script = ExtResource("1_hymbc")
 camera = NodePath("CameraRotator/Camera3D")
 movementSpeed = 5.0
 runningSpeed = 5.0
+rotationSpeed = 4.0
 
 [node name="Model" parent="." instance=ExtResource("2_flnac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.763152, 0)

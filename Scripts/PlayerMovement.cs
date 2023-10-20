@@ -4,10 +4,11 @@ public partial class PlayerMovement : CharacterBody3D
 {
 	[Export] Camera3D camera;
 	[Export] float movementSpeed = 1f, runningSpeed = 1f;
+	[Export] float rotationSpeed = 3f;
 	
 	Node3D model;
 
-	Vector3 forward, left;
+	Vector3 forward, left, rotationDirection;
 
 	public override void _Ready()
 	{
@@ -31,13 +32,17 @@ public partial class PlayerMovement : CharacterBody3D
 		Vector3 moveDirection = left * (Input.GetActionStrength("Right") - Input.GetActionStrength("Left")) + forward * (Input.GetActionStrength("Back") - Input.GetActionStrength("Forward"));
 
 		if(moveDirection != Vector3.Zero)
-			RotatePlayer(moveDirection + GlobalPosition);
+		{
+			rotationDirection = moveDirection + GlobalPosition;
+		}
+		
+		RotatePlayer(rotationDirection, (float)delta);
 		
 		moveDirection *= movementSpeed + (Input.GetActionStrength("Sprint") * runningSpeed);
 		moveDirection.Y -= 5;
 		
 		Velocity = moveDirection;
-
+		
 		MoveAndSlide();
 	}
 
@@ -45,15 +50,21 @@ public partial class PlayerMovement : CharacterBody3D
 	{
 		if(@event is InputEventMouseButton press && press.Pressed)
 		{
-			RotatePlayer(ScreenToWorldPoint(press.Position));
+			rotationDirection = ScreenToWorldPoint(press.Position);
 		}
 	}
 	
-	void RotatePlayer(Vector3 vectorToLook)
+	void RotatePlayer(Vector3 vectorToLook, float delta = 1)
 	{
-		model.LookAt(vectorToLook);
-			
-		model.Rotation = new(0,model.Rotation.Y + Mathf.Pi, 0);
+		// model.LookAt(vectorToLook, null, true);
+
+		// model.Rotation = new(0,model.Rotation.Y, 0);
+		
+		Vector3 look = vectorToLook - model.GlobalPosition;
+		look.Y = 0;
+		
+		float angle = look.SignedAngleTo(new Vector3(0,0,1), new Vector3(0,-1,0));
+		model.Rotation = new(0,Mathf.LerpAngle(model.Rotation.Y, angle, rotationSpeed * delta), 0);
 	}
 
 
