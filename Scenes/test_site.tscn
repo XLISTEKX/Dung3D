@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3ra6chicawpd"]
+[gd_scene load_steps=15 format=3 uid="uid://b3ra6chicawpd"]
 
+[ext_resource type="Script" path="res://Scenes/UIGameplay.cs" id="1_82bf0"]
 [ext_resource type="PackedScene" uid="uid://bikgsyhi48bf3" path="res://Prefabs/player.tscn" id="2_obq2u"]
 [ext_resource type="PackedScene" uid="uid://bf13ay8l1ihku" path="res://Prefabs/FPS_Counter.tscn" id="2_tyqye"]
+[ext_resource type="FontFile" uid="uid://dlq3xxtfr5wu0" path="res://Fonts/PixelSans/PixelifySans-SemiBold.ttf" id="2_xllyw"]
+[ext_resource type="PackedScene" uid="uid://cjrv3muq7rk8n" path="res://Prefabs/sprint_bar.tscn" id="4_1nmw7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l0b3m"]
 sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
@@ -25,6 +28,14 @@ size = Vector2(100, 100)
 [sub_resource type="BoxMesh" id="BoxMesh_v8nd0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_20kpl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e5rq8"]
+font = ExtResource("2_xllyw")
+font_color = Color(0, 0, 0, 0.694118)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qp2u8"]
+font = ExtResource("2_xllyw")
+font_color = Color(0, 0, 0, 0.686275)
 
 [node name="TestSite" type="Node3D"]
 
@@ -55,8 +66,67 @@ mesh = SubResource("BoxMesh_v8nd0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
 shape = SubResource("BoxShape3D_20kpl")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UIGameplay" type="CanvasLayer" parent="." node_paths=PackedStringArray("staminaBar")]
+script = ExtResource("1_82bf0")
+staminaBar = NodePath("SprintBar")
 
-[node name="Panel" parent="CanvasLayer" instance=ExtResource("2_tyqye")]
+[node name="Panel" parent="UIGameplay" instance=ExtResource("2_tyqye")]
+
+[node name="Control" type="Control" parent="UIGameplay"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_right = 300.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UIGameplay/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Controls:"
+label_settings = SubResource("LabelSettings_e5rq8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UIGameplay/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 23.0
+offset_bottom = 49.0
+grow_horizontal = 2
+text = "WASD - Movement"
+label_settings = SubResource("LabelSettings_e5rq8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UIGameplay/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 52.0
+offset_bottom = 78.0
+grow_horizontal = 2
+text = "Shift - Sprint"
+label_settings = SubResource("LabelSettings_qp2u8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SprintBar" parent="UIGameplay" instance=ExtResource("4_1nmw7")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -48.0
+offset_right = 110.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="proto-gltf" parent="." instance=ExtResource("2_obq2u")]

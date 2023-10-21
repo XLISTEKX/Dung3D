@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjrv3muq7rk8n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ib3gv"]
+bg_color = Color(0, 0, 0, 0.490196)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8h5rr"]
+bg_color = Color(0, 0.705882, 1, 0.784314)
+
+[sub_resource type="Theme" id="Theme_i6eyo"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_ib3gv")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_8h5rr")
+
+[node name="SprintBar" type="ProgressBar"]
+offset_right = 200.0
+offset_bottom = 50.0
+theme = SubResource("Theme_i6eyo")
+step = 1.0
+value = 50.0
+show_percentage = false

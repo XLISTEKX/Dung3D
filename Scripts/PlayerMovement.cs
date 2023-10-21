@@ -9,6 +9,8 @@ public partial class PlayerMovement : CharacterBody3D
 	
 	Node3D model;
 
+	PlayerControler playerControler;
+
 	Vector3 forward, left, rotationDirection;
 
 	private bool isIdle, isRunning, isSprinting;
@@ -26,6 +28,8 @@ public partial class PlayerMovement : CharacterBody3D
 		left = camera.GlobalTransform.Basis.X.Normalized();
 		
 		model = GetChild<Node3D>(0);
+
+		playerControler = GetChild<PlayerControler>(1);		
 	}
 
 
@@ -35,38 +39,51 @@ public partial class PlayerMovement : CharacterBody3D
 		
 		Vector3 moveDirection = left * (Input.GetActionStrength("Right") - Input.GetActionStrength("Left")) + forward * (Input.GetActionStrength("Back") - Input.GetActionStrength("Forward"));
 
+		float sprintStrenght = Input.GetActionStrength("Sprint"), tempMoveSpeed = movementSpeed;
+
 		if(moveDirection != Vector3.Zero)
 		{
 			rotationDirection = moveDirection + GlobalPosition;
-		} 
-		
-		RotatePlayer(rotationDirection, (float)delta);
-		
-		moveDirection *= movementSpeed + (Input.GetActionStrength("Sprint") * runningSpeed);
-		moveDirection.Y -= 5;
-		
-		Velocity = moveDirection;
 
-		if((left * (Input.GetActionStrength("Right") - Input.GetActionStrength("Left")) + forward * (Input.GetActionStrength("Back") - Input.GetActionStrength("Forward"))) != Vector3.Zero){
-			//^ this has been copied from init of Vector3 moveDirection
 			isIdle = false;
-			if(Input.GetActionStrength("Sprint") != 0){
+			if(sprintStrenght != 0)
+			{
+				playerControler.UpdateStamina(-10 * (float) delta);
+
+				if(playerControler.stamina > 0)
+				{
+					tempMoveSpeed += sprintStrenght * runningSpeed;
+				}
+				
+
 				isRunning = false;
 				isSprinting = true;
 			}
 			else
 			{
-			isSprinting = false;
-			isRunning = true;
+				playerControler.UpdateStamina(10 * (float) delta);
+
+				isSprinting = false;
+				isRunning = true;
 			}
-			//oopsies, a nested if statement!
-		}
+		} 
 		else
 		{
+			playerControler.UpdateStamina(10 * (float) delta);
+
 			isSprinting = false;
 			isRunning = false;
 			isIdle = true;
 		}
+		
+		RotatePlayer(rotationDirection, (float)delta);
+
+		moveDirection *= tempMoveSpeed;
+		moveDirection.Y -= 5;
+		
+		Velocity = moveDirection;
+
+		
 
 		MoveAndSlide();
 		HandleAnimations();
