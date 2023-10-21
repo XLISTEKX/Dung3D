@@ -38,10 +38,7 @@ public partial class PlayerMovement : CharacterBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-/*
-		skeleton.SetBonePoseRotation(skeleton.FindBone("spine.006"), skeleton.GetBonePoseRotation(skeleton.FindBone("spine.006"))*200);
-		GD.Print(skeleton.GetBonePoseRotation(skeleton.FindBone("spine.006")));
-*/
+
 		Vector3 moveDirection = left * (Input.GetActionStrength("Right") - Input.GetActionStrength("Left")) + forward * (Input.GetActionStrength("Back") - Input.GetActionStrength("Forward"));
 
 		float sprintStrenght = Input.GetActionStrength("Sprint"), tempMoveSpeed = movementSpeed;
@@ -104,7 +101,6 @@ public partial class PlayerMovement : CharacterBody3D
 		if(@event is InputEventMouseButton press && press.Pressed)
 		{
 			rotationDirection = ScreenToWorldPoint(press.Position);
-			//TODO add turning animations for idle->turn
 		}
 	}
 	
@@ -116,7 +112,6 @@ public partial class PlayerMovement : CharacterBody3D
 		float angle = look.SignedAngleTo(new Vector3(0,0,1), new Vector3(0,-1,0));
 		model.Rotation = new(0,Mathf.LerpAngle(model.Rotation.Y, angle, rotationSpeed * delta), 0);
 	}
-
 
 	public Vector3 ScreenToWorldPoint(Vector2 position)
 	{
