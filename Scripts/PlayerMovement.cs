@@ -5,6 +5,7 @@ public partial class PlayerMovement : CharacterBody3D
 {
 	[Export] Camera3D camera;
 	[Export] AnimationTree tree;
+	//[Export] Skeleton3D skeleton;
 	[Export] float movementSpeed = 4f, runningSpeed = 2.5f;
 	[Export] float rotationSpeed = 10f;
 
@@ -37,7 +38,10 @@ public partial class PlayerMovement : CharacterBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-		
+/*
+		skeleton.SetBonePoseRotation(skeleton.FindBone("spine.006"), skeleton.GetBonePoseRotation(skeleton.FindBone("spine.006"))*200);
+		GD.Print(skeleton.GetBonePoseRotation(skeleton.FindBone("spine.006")));
+*/
 		Vector3 moveDirection = left * (Input.GetActionStrength("Right") - Input.GetActionStrength("Left")) + forward * (Input.GetActionStrength("Back") - Input.GetActionStrength("Forward"));
 
 		float sprintStrenght = Input.GetActionStrength("Sprint"), tempMoveSpeed = movementSpeed;
