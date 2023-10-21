@@ -99,7 +99,7 @@ public partial class PlayerMovement : CharacterBody3D
 	}
 	
 
-	public override async void _Input(InputEvent @event)
+	public override void _Input(InputEvent @event)
 	{
 		if(@event is InputEventMouseButton press && press.Pressed)
 		{
