@@ -61,7 +61,7 @@ public partial class PlayerMovement : CharacterBody3D
 			}
 			else
 			{
-				playerControler.UpdateStamina(10 * (float) delta);
+				playerControler.UpdateStamina(5 * (float) delta);
 
 				isSprinting = false;
 				isRunning = true;

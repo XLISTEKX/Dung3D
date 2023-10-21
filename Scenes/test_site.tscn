@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://b3ra6chicawpd"]
 
-[ext_resource type="Script" path="res://Scenes/UIGameplay.cs" id="1_82bf0"]
+[ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="1_xa4d3"]
 [ext_resource type="PackedScene" uid="uid://bikgsyhi48bf3" path="res://Prefabs/player.tscn" id="2_obq2u"]
 [ext_resource type="PackedScene" uid="uid://bf13ay8l1ihku" path="res://Prefabs/FPS_Counter.tscn" id="2_tyqye"]
 [ext_resource type="FontFile" uid="uid://dlq3xxtfr5wu0" path="res://Fonts/PixelSans/PixelifySans-SemiBold.ttf" id="2_xllyw"]
@@ -67,7 +67,7 @@ mesh = SubResource("BoxMesh_v8nd0")
 shape = SubResource("BoxShape3D_20kpl")
 
 [node name="UIGameplay" type="CanvasLayer" parent="." node_paths=PackedStringArray("staminaBar")]
-script = ExtResource("1_82bf0")
+script = ExtResource("1_xa4d3")
 staminaBar = NodePath("SprintBar")
 
 [node name="Panel" parent="UIGameplay" instance=ExtResource("2_tyqye")]
