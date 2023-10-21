@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class PlayerMovement : CharacterBody3D
@@ -6,14 +7,14 @@ public partial class PlayerMovement : CharacterBody3D
 	[Export] AnimationTree tree;
 	[Export] float movementSpeed = 4f, runningSpeed = 2.5f;
 	[Export] float rotationSpeed = 10f;
-	
+
 	Node3D model;
 
 	PlayerControler playerControler;
 
 	Vector3 forward, left, rotationDirection;
 
-	private bool isIdle, isRunning, isSprinting;
+	private bool isIdle, isWalking, isSprinting, isTurningLeft, isTurningRight;
 	//For animation mostly
 
 	public override void _Ready()
@@ -49,22 +50,26 @@ public partial class PlayerMovement : CharacterBody3D
 			if(sprintStrenght != 0)
 			{
 				playerControler.UpdateStamina(-10 * (float) delta);
-
+				isWalking = false;
+				isSprinting = true;
 				if(playerControler.stamina > 0)
 				{
 					tempMoveSpeed += sprintStrenght * runningSpeed;
 				}
-				
-
-				isRunning = false;
-				isSprinting = true;
+				else
+				{
+				isWalking = true;
+				isSprinting = false;
+				}
+				//TODO; fix sprint recharge after stamina is depleted
+				//TODO; remake walking anim, looks subpar
 			}
 			else
 			{
 				playerControler.UpdateStamina(5 * (float) delta);
 
 				isSprinting = false;
-				isRunning = true;
+				isWalking = true;
 			}
 		} 
 		else
@@ -72,7 +77,7 @@ public partial class PlayerMovement : CharacterBody3D
 			playerControler.UpdateStamina(10 * (float) delta);
 
 			isSprinting = false;
-			isRunning = false;
+			isWalking = false;
 			isIdle = true;
 		}
 		
@@ -88,12 +93,14 @@ public partial class PlayerMovement : CharacterBody3D
 		MoveAndSlide();
 		HandleAnimations();
 	}
+	
 
-	public override void _Input(InputEvent @event)
+	public override async void _Input(InputEvent @event)
 	{
 		if(@event is InputEventMouseButton press && press.Pressed)
 		{
 			rotationDirection = ScreenToWorldPoint(press.Position);
+			//TODO add turning animations for idle->turn
 		}
 	}
 	
@@ -123,7 +130,9 @@ public partial class PlayerMovement : CharacterBody3D
 	private void HandleAnimations()
 	{
 		tree.Set("parameters/conditions/idle", isIdle);
-		tree.Set("parameters/conditions/running", isRunning);
-		tree.Set("parameters/conditions/sprinting", isSprinting);
+		tree.Set("parameters/conditions/walk", isWalking);
+		tree.Set("parameters/conditions/sprint", isSprinting);
+		tree.Set("parameters/conditions/leftTurn", isTurningLeft);
+		tree.Set("parameters/conditions/rightTurn", isTurningRight);
 	}
 }
