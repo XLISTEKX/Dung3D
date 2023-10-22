@@ -21,8 +21,12 @@ public partial class PlayerControler : Node3D
 		
 		playerInventory = new(10);
 		
-		InventorySystem.ReadFromJson("Items.json");
-
+		InventorySystem.GetAllItems();
+		
+		// foreach(Item item in InventorySystem.GetAllItems())
+		// {
+		// 	GD.Print(item.name);
+		// }
 	}
 
 	public override void _Process(double delta)

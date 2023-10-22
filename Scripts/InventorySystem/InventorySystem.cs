@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Godot;
 
@@ -6,6 +7,29 @@ namespace XGeneric.Inventory
 {
 	public static class InventorySystem
 	{
+		
+		public static Item[] GetAllItems()
+		{
+			Item item = new("S", 1, "S");
+			
+			ResourceSaver.Save(item,"res://Prefabs/Items/s.tres");
+			
+			var itemsPaths = DirAccess.GetFilesAt("res://Prefabs/Items");
+			List<Item> output = new();
+
+			Item t = ResourceLoader.Load("res://Prefabs/Items/s.tres", "",ResourceLoader.CacheMode.Ignore) as Item;
+
+			// var k = ResourceLoader.Load("res://Prefabs/Items/s.tres");
+			// GD.Print(k);
+			
+			// foreach(string path in itemsPaths)
+			// {
+			// 	output.Add(ResourceLoader.Load<Item>("res://Prefabs/Items/" + path));
+			// }
+			
+			return null;
+		}
+		
 		public static void ReadFromJson(string path)
 		{
 			

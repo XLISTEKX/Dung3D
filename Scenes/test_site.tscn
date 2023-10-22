@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bf13ay8l1ihku" path="res://Prefabs/FPS_Counter.tscn" id="2_tyqye"]
 [ext_resource type="FontFile" uid="uid://dlq3xxtfr5wu0" path="res://Fonts/PixelSans/PixelifySans-SemiBold.ttf" id="2_xllyw"]
 [ext_resource type="PackedScene" uid="uid://cjrv3muq7rk8n" path="res://Prefabs/sprint_bar.tscn" id="4_1nmw7"]
-[ext_resource type="PackedScene" uid="uid://cjsa5t7ssi3h1" path="res://Prefabs/stephen.tscn" id="6_vanjg"]
+[ext_resource type="PackedScene" path="res://Prefabs/stephen.tscn" id="6_vanjg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l0b3m"]
 sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)

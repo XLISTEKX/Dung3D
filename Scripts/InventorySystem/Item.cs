@@ -2,11 +2,11 @@ using Godot;
 
 namespace XGeneric.Inventory
 {
-	public partial class Item
+	public partial class Item : Resource
 	{
-		public string name { get; set;}
-		public int id{ get; set;}
-		public string iconPath{ get; set;}
+		[Export] public string name { get; set;}
+		[Export] public int id{ get; set;}
+		[Export] public string iconPath{ get; set;}
 		
 		public Item(string name, int id, string iconPath)
 		{

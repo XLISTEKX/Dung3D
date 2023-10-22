@@ -1,8 +1,8 @@
 {
-    "Test": 
-    {
-        "name": "Sword",
-        "id": 0,
-        "icon": "sword.png"
-    }
+	"Test": 
+	{
+		"name": "Sword",
+		"id": 0,
+		"icon": "sword.png"
+	}
 }
