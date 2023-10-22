@@ -13,7 +13,7 @@ namespace XGeneric.Inventory
             items = new Item[InventorySize].ToList();
             size = InventorySize;
         }
-
+        //Adds item to inventory 
         public bool AddItem(Item itemToAdd)
         {
             for(int i = 0; i < items.Count; i++)
@@ -26,7 +26,7 @@ namespace XGeneric.Inventory
             }
             return false;
         }
-
+        //Remove item by given ID
         public void RemoveItem(int ID)
         {
             items[ID] = null;

@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://b3ra6chicawpd"]
+[gd_scene load_steps=17 format=3 uid="uid://b3ra6chicawpd"]
 
+[ext_resource type="Script" path="res://Scripts/Gameplay/GameControler.cs" id="1_1tpb6"]
 [ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="1_xa4d3"]
 [ext_resource type="PackedScene" uid="uid://bikgsyhi48bf3" path="res://Prefabs/player.tscn" id="2_obq2u"]
 [ext_resource type="PackedScene" uid="uid://bf13ay8l1ihku" path="res://Prefabs/FPS_Counter.tscn" id="2_tyqye"]
@@ -41,6 +42,8 @@ font_color = Color(0, 0, 0, 0.686275)
 [node name="TestSite" type="Node3D"]
 
 [node name="GameControler" type="Node3D" parent="."]
+script = ExtResource("1_1tpb6")
+itemsJsonPath = "res://Scripts/Items/Items.json"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)

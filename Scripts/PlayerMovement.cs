@@ -95,7 +95,7 @@ public partial class PlayerMovement : CharacterBody3D
 		HandleAnimations();
 	}
 	
-
+    //Called 
 	public override void _Input(InputEvent @event)
 	{
 		if(@event is InputEventMouseButton press && press.Pressed)
@@ -103,7 +103,7 @@ public partial class PlayerMovement : CharacterBody3D
 			rotationDirection = ScreenToWorldPoint(press.Position);
 		}
 	}
-	
+	//Rotates player to given position in World + deltaTime to handle lerp
 	void RotatePlayer(Vector3 vectorToLook, float delta = 1)
 	{
 		Vector3 look = vectorToLook - model.GlobalPosition;
@@ -112,7 +112,7 @@ public partial class PlayerMovement : CharacterBody3D
 		float angle = look.SignedAngleTo(new Vector3(0,0,1), new Vector3(0,-1,0));
 		model.Rotation = new(0,Mathf.LerpAngle(model.Rotation.Y, angle, rotationSpeed * delta), 0);
 	}
-
+	//Static func to get Point in space by Screen point
 	public Vector3 ScreenToWorldPoint(Vector2 position)
 	{
 		var SpaceState = GetWorld3D().DirectSpaceState;
@@ -125,7 +125,7 @@ public partial class PlayerMovement : CharacterBody3D
 		
 		return (Vector3) rayArray["position"];
 	}
-
+	//???
 	private void HandleAnimations()
 	{
 		tree.Set("parameters/conditions/idle", isIdle);

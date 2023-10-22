@@ -21,6 +21,7 @@ public partial class PlayerControler : Node3D
 		
 		playerInventory = new(10);
 		
+		playerInventory.AddItem(InventorySystem.GetItemFromJson(0));
 	}
 
 	public override void _Process(double delta)
