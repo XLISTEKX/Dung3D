@@ -1,7 +1,4 @@
 using Godot;
-using System;
-using System.IO;
-using System.Text.Json;
 using XGeneric.Inventory;
 
 public partial class PlayerControler : Node3D

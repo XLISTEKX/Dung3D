@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdob34khy1ag0"]
+
+[ext_resource type="Texture2D" uid="uid://cpi6kmxmiumda" path="res://Sprites/Branch.png" id="1_bu7o3"]
+[ext_resource type="FontFile" uid="uid://br3t28ge8ogyy" path="res://Fonts/PixelSans/PixelifySans-Bold.ttf" id="2_7pci4"]
+[ext_resource type="Texture2D" uid="uid://bioxy7xe2xkk" path="res://Sprites/Border.png" id="3_ej3ci"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg5jx"]
+bg_color = Color(0, 0, 0, 0.666667)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g5pax"]
+font = ExtResource("2_7pci4")
+font_size = 24
+
+[node name="Slot" type="Panel"]
+offset_right = 100.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg5jx")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.15
+anchor_right = 0.85
+anchor_bottom = 0.85
+texture = ExtResource("1_bu7o3")
+
+[node name="Quality" type="TextureRect" parent="."]
+modulate = Color(0, 1, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ej3ci")
+
+[node name="Quantity" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "_ph
+"
+label_settings = SubResource("LabelSettings_g5pax")
+horizontal_alignment = 1
+vertical_alignment = 1

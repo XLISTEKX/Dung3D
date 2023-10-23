@@ -5,18 +5,18 @@ namespace XGeneric.Inventory
 {
     public class Inventory
     {
-        public List<Item> items;
+        public Item[] items;
         public int size;
 
         public Inventory(int InventorySize)
         {
-            items = new Item[InventorySize].ToList();
+            items = new Item[InventorySize];
             size = InventorySize;
         }
         //Adds item to inventory 
         public bool AddItem(Item itemToAdd)
         {
-            for(int i = 0; i < items.Count; i++)
+            for(int i = 0; i < size; i++)
             {
                 if(items[i] == null)
                 {

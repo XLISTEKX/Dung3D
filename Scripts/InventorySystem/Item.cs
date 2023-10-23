@@ -2,7 +2,7 @@ using Godot;
 
 namespace XGeneric.Inventory
 {
-	public partial class Item : Resource
+	public class Item
 	{
 		[Export] public string name { get; set;}
 		[Export] public int id{ get; set;}
