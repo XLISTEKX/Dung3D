@@ -1,11 +1,26 @@
 using Godot;
 using XGeneric.Inventory;
 
-public partial class PlayerControler : Node3D
+public partial class PlayerControler : Node3D, HealthSystem
 {
 	[Export] public float staminaMax = 10;
 	UIGameplay uIGameplay;
 	Inventory playerInventory;
+
+	#region HealthSystem
+	[Export] int maxHealth = 1;
+	int health = 10;
+	
+	public int Health
+	{
+		get
+		{
+			return health;
+		}
+	}
+	
+	#endregion
+
 
 	public float stamina = 10;
 
@@ -19,15 +34,10 @@ public partial class PlayerControler : Node3D
 		playerInventory = new(10);
 		
 		playerInventory.AddItem(InventorySystem.GetItemFromJson(0));
+		
+		health = maxHealth;
 	}
 
-	public override void _Process(double delta)
-	{
-		base._Process(delta);
-		
-		UpdateUI();
-	}
-	
 	public void UpdateUI()
 	{
 		uIGameplay.UpdateStamina(stamina);
@@ -52,6 +62,21 @@ public partial class PlayerControler : Node3D
 		{
 			stamina = staminaMax;
 		}
+		
+		UpdateUI();
 	}
-	
+
+	public void TakeDamage(int damage)
+	{
+		health -= damage;
+		
+		if(health <= 0)
+		{
+			Dead();
+		}
+	}
+	public void Dead()
+	{
+		
+	}
 }

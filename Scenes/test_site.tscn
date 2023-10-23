@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3ra6chicawpd"]
+[gd_scene load_steps=18 format=3 uid="uid://b3ra6chicawpd"]
 
 [ext_resource type="Script" path="res://Scripts/Gameplay/GameControler.cs" id="1_1tpb6"]
 [ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="1_xa4d3"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://dlq3xxtfr5wu0" path="res://Fonts/PixelSans/PixelifySans-SemiBold.ttf" id="2_xllyw"]
 [ext_resource type="PackedScene" uid="uid://cjrv3muq7rk8n" path="res://Prefabs/sprint_bar.tscn" id="4_1nmw7"]
 [ext_resource type="PackedScene" uid="uid://cjsa5t7ssi3h1" path="res://Prefabs/stephen.tscn" id="6_vanjg"]
+[ext_resource type="PackedScene" uid="uid://dlvjkuewyofm5" path="res://Prefabs/Bomba.tscn" id="8_rgwk1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l0b3m"]
 sky_top_color = Color(0.384314, 0.454902, 0.54902, 1)
@@ -139,3 +140,6 @@ grow_vertical = 0
 
 [node name="Stephen" parent="." instance=ExtResource("6_vanjg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70926, 0, 3.68255)
+
+[node name="Bomba" parent="." instance=ExtResource("8_rgwk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7891, 1.01943, 5.77112)
