@@ -31,11 +31,11 @@ public partial class PlayerControler : Node3D, HealthSystem
 		
 		uIGameplay.InitUI(this);
 		
-		playerInventory = new(10);
+		// playerInventory = new(10);
 		
-		playerInventory.AddItem(InventorySystem.GetItemFromJson(0));
+		// playerInventory.AddItem(InventorySystem.GetItemFromJson(0));
 		
-		health = maxHealth;
+		 health = maxHealth;
 	}
 
 	public void UpdateUI()
@@ -77,6 +77,8 @@ public partial class PlayerControler : Node3D, HealthSystem
 	}
 	public void Dead()
 	{
-		
+		InvItem item = ResourceLoader.Load<InvItem>("res://Prefabs/Items/Item1.tres");
+	
+		GD.Print(item.Name);
 	}
 }
