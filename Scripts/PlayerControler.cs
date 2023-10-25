@@ -77,8 +77,6 @@ public partial class PlayerControler : Node3D, HealthSystem
 	}
 	public void Dead()
 	{
-		InvItem item = ResourceLoader.Load<InvItem>("res://Prefabs/Items/Item1.tres");
-	
-		GD.Print(item.Name);
+		GD.Print(InventorySystem.GetAllItems()[0].ID);
 	}
 }
