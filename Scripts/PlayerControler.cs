@@ -27,7 +27,7 @@ public partial class PlayerControler : Node3D, HealthSystem
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		uIGameplay = GetNode<UIGameplay>("../../UI/Gameplay");
+		uIGameplay = GetNode<UIGameplay>("/root/TestSite/UI/Gameplay");
 		health = maxHealth;
 		uIGameplay.InitUI(this);
 		
