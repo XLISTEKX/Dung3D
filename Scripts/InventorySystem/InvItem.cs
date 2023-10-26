@@ -1,11 +1,17 @@
 using Godot;
 using System;
-[GlobalClass][Tool]
-public partial class InvItem : Resource
+
+namespace XGeneric.Inventory
 {
-	[Export] public int ID;
-	[Export] public string Name;
-	[Export] public Texture ItemIcon;
-	[Export] public PackedScene InWorldItem;
-	
+	[GlobalClass][Tool]
+	public partial class InvItem : Resource
+	{
+		[Export] public int ID;
+		[Export] public string Name;
+		[Export] public Texture2D ItemIcon;
+		[Export] public PackedScene InWorldItem;
+		[Export] public RarityTypes rarity;
+		
+	}
 }
+

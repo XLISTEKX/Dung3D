@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="InvItem" load_steps=2 format=3 uid="uid://dhq262nr512fd"]
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://dhq262nr512fd"]
 
+[ext_resource type="Texture2D" uid="uid://cpunx35o5iqkd" path="res://Sprites/Longsword.png" id="1_d3qq7"]
 [ext_resource type="Script" path="res://Scripts/InventorySystem/InvItem.cs" id="1_kphqi"]
 
 [resource]
 script = ExtResource("1_kphqi")
 ID = 0
 Name = "Honolulu"
+ItemIcon = ExtResource("1_d3qq7")
+rarity = 2

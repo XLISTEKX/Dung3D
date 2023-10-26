@@ -18,7 +18,7 @@ public partial class UIManager : CanvasLayer
 		playerControler = GetTree().GetFirstNodeInGroup("Player").GetChild<PlayerControler>(1);
 	}
 
-	public void ToggleUILayer(int ID)
+    public void ToggleUILayer(int ID)
 	{
 		allLayers[currentID].Visible = false;
 		allLayers[ID].Visible = true;

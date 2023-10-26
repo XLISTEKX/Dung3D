@@ -58,8 +58,6 @@ script = ExtResource("1_xa4d3")
 staminaBar = NodePath("SprintBar")
 healthBar = NodePath("HealthBar")
 
-[node name="Panel" parent="UI/Gameplay" instance=ExtResource("2_tyqye")]
-
 [node name="Control" type="Control" parent="UI/Gameplay"]
 layout_mode = 3
 anchors_preset = 2
@@ -147,6 +145,8 @@ texture_hover = ExtResource("6_fvpr8")
 texture_disabled = ExtResource("6_fvpr8")
 texture_focused = ExtResource("6_fvpr8")
 stretch_mode = 5
+
+[node name="Panel" parent="UI" instance=ExtResource("2_tyqye")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)

@@ -32,7 +32,7 @@ public partial class PlayerControler : Node3D, HealthSystem
 		uIGameplay.InitUI(this);
 		
 		playerInventory = new(30);
-		
+		playerInventory.AddItem(InventorySystem.GetItemByID(0));
 		
 		UpdateUI();
 	}

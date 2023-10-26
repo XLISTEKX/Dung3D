@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdob34khy1ag0"]
+[gd_scene load_steps=7 format=3 uid="uid://bdob34khy1ag0"]
 
 [ext_resource type="Texture2D" uid="uid://cpi6kmxmiumda" path="res://Sprites/Branch.png" id="1_bu7o3"]
+[ext_resource type="Script" path="res://Scripts/UI/Inventory/Slot.cs" id="1_vkenm"]
 [ext_resource type="FontFile" uid="uid://br3t28ge8ogyy" path="res://Fonts/PixelSans/PixelifySans-Bold.ttf" id="2_7pci4"]
 [ext_resource type="Texture2D" uid="uid://bioxy7xe2xkk" path="res://Sprites/Border.png" id="3_ej3ci"]
 
@@ -11,12 +12,16 @@ bg_color = Color(0, 0, 0, 0.666667)
 font = ExtResource("2_7pci4")
 font_size = 24
 
-[node name="Slot" type="Panel"]
+[node name="Slot" type="Panel" node_paths=PackedStringArray("Quantity", "Icon", "Quality")]
 custom_minimum_size = Vector2(100, 100)
 layout_direction = 2
 offset_right = 100.0
 offset_bottom = 100.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bg5jx")
+script = ExtResource("1_vkenm")
+Quantity = NodePath("Quantity")
+Icon = NodePath("Icon")
+Quality = NodePath("Quality")
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 1

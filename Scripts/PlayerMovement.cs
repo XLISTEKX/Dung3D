@@ -92,15 +92,13 @@ public partial class PlayerMovement : CharacterBody3D
 		MoveAndSlide();
 		HandleAnimations();
 	}
-	
-    //Called 
-	public override void _Input(InputEvent @event)
-	{
-		if(@event is InputEventMouseButton press && press.Pressed)
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if(@event is InputEventMouseButton press && press.ButtonIndex == MouseButton.Left && press.Pressed)
 		{
 			rotationDirection = ScreenToWorldPoint(press.Position);
 		}
-	}
+    }
 	//Rotates player to given position in World + deltaTime to handle lerp
 	void RotatePlayer(Vector3 vectorToLook, float delta = 1)
 	{
@@ -120,7 +118,7 @@ public partial class PlayerMovement : CharacterBody3D
 		var querry = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
 		
 		var rayArray = SpaceState.IntersectRay(querry);
-		
+		//GD.Print(rayArray["Name"]);
 		return (Vector3) rayArray["position"];
 	}
 	//???
