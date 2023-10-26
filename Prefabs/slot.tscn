@@ -12,6 +12,8 @@ font = ExtResource("2_7pci4")
 font_size = 24
 
 [node name="Slot" type="Panel"]
+custom_minimum_size = Vector2(100, 100)
+layout_direction = 2
 offset_right = 100.0
 offset_bottom = 100.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bg5jx")

@@ -1,0 +1,97 @@
+[gd_scene load_steps=15 format=3 uid="uid://cxxehy12xcth6"]
+
+[ext_resource type="Script" path="res://Scripts/UI/InventoryUI.cs" id="1_a6k78"]
+[ext_resource type="FontFile" uid="uid://br3t28ge8ogyy" path="res://Fonts/PixelSans/PixelifySans-Bold.ttf" id="2_ih1wg"]
+[ext_resource type="PackedScene" uid="uid://bdob34khy1ag0" path="res://Prefabs/slot.tscn" id="2_ntwwv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ndfyf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g3vg6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ew7wg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s8yon"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ghkv"]
+
+[sub_resource type="Theme" id="Theme_xe8w3"]
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_ndfyf")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_g3vg6")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_ew7wg")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_s8yon")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_2ghkv")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_80dm6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ax6re"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xs77o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qo7fp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h58ef"]
+
+[node name="InventoryUI" type="CanvasLayer" node_paths=PackedStringArray("slotTransform")]
+script = ExtResource("1_a6k78")
+slot = ExtResource("2_ntwwv")
+slotTransform = NodePath("Control/TabContainer/S/ScrollContainer/GridContainer")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.3
+anchor_top = 0.1
+anchor_right = 0.7
+anchor_bottom = 0.9
+
+[node name="TabContainer" type="TabContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -6.10352e-05
+grow_horizontal = 2
+grow_vertical = 2
+tabs_visible = false
+
+[node name="S" type="Control" parent="Control/TabContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/TabContainer/S"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.399948
+offset_top = 20.0
+offset_right = -0.399948
+offset_bottom = -18.4
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xe8w3")
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="Control/TabContainer/S/ScrollContainer"]
+process_mode = 3
+layout_mode = 2
+columns = 4
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.0
+offset_right = 37.0
+offset_bottom = 60.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ih1wg")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxEmpty_80dm6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ax6re")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xs77o")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qo7fp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h58ef")
+text = "X"
+
+[connection signal="pressed" from="Button" to="." method="CloseInventory"]

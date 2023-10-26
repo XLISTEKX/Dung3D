@@ -33,8 +33,6 @@ public partial class PlayerMovement : CharacterBody3D
 
 		playerControler = GetChild<PlayerControler>(1);		
 	}
-
-
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);

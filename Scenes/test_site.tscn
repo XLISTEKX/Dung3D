@@ -1,11 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://b3ra6chicawpd"]
+[gd_scene load_steps=21 format=3 uid="uid://b3ra6chicawpd"]
 
 [ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="1_xa4d3"]
 [ext_resource type="Script" path="res://Scripts/UI/UIManager.cs" id="2_jvsvf"]
 [ext_resource type="PackedScene" uid="uid://bikgsyhi48bf3" path="res://Prefabs/player.tscn" id="2_obq2u"]
+[ext_resource type="PackedScene" uid="uid://cxxehy12xcth6" path="res://Prefabs/UI/inventory_ui.tscn" id="2_qqiac"]
 [ext_resource type="PackedScene" uid="uid://bf13ay8l1ihku" path="res://Prefabs/FPS_Counter.tscn" id="2_tyqye"]
 [ext_resource type="FontFile" uid="uid://dlq3xxtfr5wu0" path="res://Fonts/PixelSans/PixelifySans-SemiBold.ttf" id="2_xllyw"]
 [ext_resource type="PackedScene" uid="uid://cjrv3muq7rk8n" path="res://Prefabs/sprint_bar.tscn" id="4_1nmw7"]
+[ext_resource type="Texture2D" uid="uid://byagd4rr443sr" path="res://Sprites/Sprite_Backpack.png" id="6_fvpr8"]
 [ext_resource type="PackedScene" uid="uid://cjsa5t7ssi3h1" path="res://Prefabs/stephen.tscn" id="6_vanjg"]
 [ext_resource type="PackedScene" uid="uid://dlvjkuewyofm5" path="res://Prefabs/Bomba.tscn" id="8_rgwk1"]
 
@@ -45,11 +47,13 @@ size = Vector2(100, 100)
 
 [node name="TestSite" type="Node3D"]
 
-[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("allLayers")]
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
 script = ExtResource("2_jvsvf")
-allLayers = []
+UIInventory = ExtResource("2_qqiac")
 
 [node name="Gameplay" type="CanvasLayer" parent="UI" node_paths=PackedStringArray("staminaBar", "healthBar")]
+process_mode = 1
 script = ExtResource("1_xa4d3")
 staminaBar = NodePath("SprintBar")
 healthBar = NodePath("HealthBar")
@@ -128,6 +132,22 @@ grow_vertical = 0
 theme_override_styles/fill = SubResource("StyleBoxFlat_npvhh")
 step = 1.0
 
+[node name="InvButton" type="TextureButton" parent="UI/Gameplay"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 16.0
+offset_right = -29.0
+offset_bottom = 84.0
+grow_horizontal = 0
+texture_normal = ExtResource("6_fvpr8")
+texture_pressed = ExtResource("6_fvpr8")
+texture_hover = ExtResource("6_fvpr8")
+texture_disabled = ExtResource("6_fvpr8")
+texture_focused = ExtResource("6_fvpr8")
+stretch_mode = 5
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
@@ -162,3 +182,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70926, 0, 3.68255)
 
 [node name="Bomba" parent="." instance=ExtResource("8_rgwk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7891, 1.01943, 5.77112)
+
+[connection signal="pressed" from="UI/Gameplay/InvButton" to="UI" method="OpenInventory"]

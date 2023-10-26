@@ -5,7 +5,7 @@ public partial class PlayerControler : Node3D, HealthSystem
 {
 	[Export] public float staminaMax = 10;
 	UIGameplay uIGameplay;
-	Inventory playerInventory;
+	public Inventory playerInventory;
 
 	#region HealthSystem
 	[Export] public int maxHealth = 1;
@@ -31,7 +31,7 @@ public partial class PlayerControler : Node3D, HealthSystem
 		health = maxHealth;
 		uIGameplay.InitUI(this);
 		
-		playerInventory = new(10);
+		playerInventory = new(30);
 		
 		
 		UpdateUI();
