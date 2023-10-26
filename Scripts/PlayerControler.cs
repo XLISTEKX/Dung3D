@@ -8,7 +8,7 @@ public partial class PlayerControler : Node3D, HealthSystem
 	Inventory playerInventory;
 
 	#region HealthSystem
-	[Export] int maxHealth = 1;
+	[Export] public int maxHealth = 1;
 	int health = 10;
 	
 	public int Health
@@ -27,20 +27,19 @@ public partial class PlayerControler : Node3D, HealthSystem
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		uIGameplay = GetNode<UIGameplay>("../../UIGameplay");
-		
+		uIGameplay = GetNode<UIGameplay>("../../UI/Gameplay");
+		health = maxHealth;
 		uIGameplay.InitUI(this);
 		
-		// playerInventory = new(10);
+		playerInventory = new(10);
 		
-		// playerInventory.AddItem(InventorySystem.GetItemFromJson(0));
 		
-		 health = maxHealth;
+		UpdateUI();
 	}
 
 	public void UpdateUI()
 	{
-		uIGameplay.UpdateStamina(stamina);
+		uIGameplay.UpdateHealth(health);
 	}
 
 	public void UpdateStamina(float valueToAdd)
@@ -63,20 +62,21 @@ public partial class PlayerControler : Node3D, HealthSystem
 			stamina = staminaMax;
 		}
 		
-		UpdateUI();
+		uIGameplay.UpdateStamina(stamina);
 	}
 
 	public void TakeDamage(int damage)
 	{
 		health -= damage;
-		
+		UpdateUI();
 		if(health <= 0)
 		{
+			health = 0;
 			Dead();
 		}
 	}
 	public void Dead()
 	{
-		GD.Print(InventorySystem.GetAllItems()[0].ID);
+		
 	}
 }

@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://b3ra6chicawpd"]
+[gd_scene load_steps=20 format=3 uid="uid://b3ra6chicawpd"]
 
 [ext_resource type="Script" path="res://Scripts/Gameplay/GameControler.cs" id="1_1tpb6"]
 [ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="1_xa4d3"]
+[ext_resource type="Script" path="res://Scripts/UI/UIManager.cs" id="2_jvsvf"]
 [ext_resource type="PackedScene" uid="uid://bikgsyhi48bf3" path="res://Prefabs/player.tscn" id="2_obq2u"]
 [ext_resource type="PackedScene" uid="uid://bf13ay8l1ihku" path="res://Prefabs/FPS_Counter.tscn" id="2_tyqye"]
 [ext_resource type="FontFile" uid="uid://dlq3xxtfr5wu0" path="res://Fonts/PixelSans/PixelifySans-SemiBold.ttf" id="2_xllyw"]
@@ -40,6 +41,9 @@ font_color = Color(0, 0, 0, 0.694118)
 font = ExtResource("2_xllyw")
 font_color = Color(0, 0, 0, 0.686275)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npvhh"]
+bg_color = Color(1, 0, 0, 0.784314)
+
 [node name="TestSite" type="Node3D"]
 
 [node name="GameControler" type="Node3D" parent="."]
@@ -73,13 +77,18 @@ mesh = SubResource("BoxMesh_v8nd0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
 shape = SubResource("BoxShape3D_20kpl")
 
-[node name="UIGameplay" type="CanvasLayer" parent="." node_paths=PackedStringArray("staminaBar")]
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("allLayers")]
+script = ExtResource("2_jvsvf")
+allLayers = []
+
+[node name="Gameplay" type="CanvasLayer" parent="UI" node_paths=PackedStringArray("staminaBar", "healthBar")]
 script = ExtResource("1_xa4d3")
 staminaBar = NodePath("SprintBar")
+healthBar = NodePath("HealthBar")
 
-[node name="Panel" parent="UIGameplay" instance=ExtResource("2_tyqye")]
+[node name="Panel" parent="UI/Gameplay" instance=ExtResource("2_tyqye")]
 
-[node name="Control" type="Control" parent="UIGameplay"]
+[node name="Control" type="Control" parent="UI/Gameplay"]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -88,7 +97,7 @@ offset_top = -100.0
 offset_right = 300.0
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="UIGameplay/Control"]
+[node name="Label" type="Label" parent="UI/Gameplay/Control"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -99,7 +108,7 @@ label_settings = SubResource("LabelSettings_e5rq8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="UIGameplay/Control"]
+[node name="Label2" type="Label" parent="UI/Gameplay/Control"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -111,7 +120,7 @@ label_settings = SubResource("LabelSettings_e5rq8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="UIGameplay/Control"]
+[node name="Label3" type="Label" parent="UI/Gameplay/Control"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -123,7 +132,20 @@ label_settings = SubResource("LabelSettings_qp2u8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SprintBar" parent="UIGameplay" instance=ExtResource("4_1nmw7")]
+[node name="SprintBar" parent="UI/Gameplay" instance=ExtResource("4_1nmw7")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -73.0
+offset_right = 110.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HealthBar" parent="UI/Gameplay" instance=ExtResource("4_1nmw7")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -135,6 +157,8 @@ offset_right = 110.0
 offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_npvhh")
+step = 1.0
 
 [node name="proto-gltf" parent="." instance=ExtResource("2_obq2u")]
 
