@@ -8,7 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dlq3xxtfr5wu0" path="res://Fonts/PixelSans/PixelifySans-SemiBold.ttf" id="2_xllyw"]
 [ext_resource type="PackedScene" uid="uid://cjrv3muq7rk8n" path="res://Prefabs/sprint_bar.tscn" id="4_1nmw7"]
 [ext_resource type="Texture2D" uid="uid://byagd4rr443sr" path="res://Sprites/Sprite_Backpack.png" id="6_fvpr8"]
-[ext_resource type="PackedScene" path="res://Prefabs/stephen.tscn" id="6_vanjg"]
+[ext_resource type="PackedScene" uid="uid://c7punei3asukq" path="res://Prefabs/stephen.tscn" id="6_vanjg"]
 [ext_resource type="PackedScene" uid="uid://dlvjkuewyofm5" path="res://Prefabs/Bomba.tscn" id="8_rgwk1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e5rq8"]
@@ -41,9 +41,9 @@ size = Vector2(100, 100)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nl7aa"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_v8nd0"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_20kpl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_v8nd0"]
 
 [node name="TestSite" type="Node3D"]
 
@@ -166,19 +166,35 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_nl7aa")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11629, 0.470518, 2.39581)
-mesh = SubResource("BoxMesh_v8nd0")
+[node name="KLoc2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.68341, 3.94439, 5.65046)
+collision_layer = 4
+collision_mask = 7
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KLoc2"]
 shape = SubResource("BoxShape3D_20kpl")
 
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="KLoc2/CollisionShape3D"]
+mesh = SubResource("BoxMesh_v8nd0")
+skeleton = NodePath("")
+
+[node name="KLoc" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2326, 0.941036, 4.79162)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KLoc"]
+shape = SubResource("BoxShape3D_20kpl")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="KLoc/CollisionShape3D"]
+mesh = SubResource("BoxMesh_v8nd0")
+skeleton = NodePath("")
+
 [node name="proto-gltf" parent="." instance=ExtResource("2_obq2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76538, 0)
 
 [node name="Stephen" parent="." instance=ExtResource("6_vanjg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70926, 0, 3.68255)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70926, 1.06609, 3.68255)
 
 [node name="Bomba" parent="." instance=ExtResource("8_rgwk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7891, 1.01943, 5.77112)

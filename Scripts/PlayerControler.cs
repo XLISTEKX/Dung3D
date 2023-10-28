@@ -35,6 +35,7 @@ public partial class PlayerControler : Node3D, HealthSystem
 		
 		playerInventory = new(30);
 		playerInventory.AddItem(InventorySystem.GetItemByID(0));
+		playerInventory.AddItem(InventorySystem.GetItemByID(1));
 		
 		UpdateUI();
 	}

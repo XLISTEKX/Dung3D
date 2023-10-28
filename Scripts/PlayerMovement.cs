@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using XGeneric.Utilities;
 
 public partial class PlayerMovement : CharacterBody3D
 {
@@ -101,13 +102,8 @@ public partial class PlayerMovement : CharacterBody3D
 	}
 	//Rotates player to given position in World + deltaTime to handle lerp
 	void RotatePlayer(Vector3 vectorToLook, float delta = 1)
-	{
-		Vector3 look = vectorToLook - model.GlobalPosition;
-		look.Y = 0;
-		
-		float angle = look.SignedAngleTo(new Vector3(0,0,1), new Vector3(0,-1,0));
-		
-		model.Rotation = new(0,Mathf.LerpAngle(model.Rotation.Y, angle, rotationSpeed * delta), 0);
+	{		
+		model.Rotation = new(0,Mathf.LerpAngle(model.Rotation.Y, MathV.GetAngleToVector(vectorToLook, model.GlobalPosition), rotationSpeed * delta), 0);
 	}
 	//Static func to get Point in space by Screen point
 	public Vector3 ScreenToWorldPoint(Vector2 position)
@@ -119,7 +115,6 @@ public partial class PlayerMovement : CharacterBody3D
 		var querry = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
 		
 		var rayArray = SpaceState.IntersectRay(querry);
-		//GD.Print(rayArray["Name"]);
 		return (Vector3) rayArray["position"];
 	}
 	//???

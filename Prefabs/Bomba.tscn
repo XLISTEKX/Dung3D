@@ -14,6 +14,8 @@ script = ExtResource("1_kl13r")
 mesh = SubResource("CylinderMesh_5ohew")
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CylinderShape3D_t0s8q")
