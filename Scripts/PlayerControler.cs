@@ -1,11 +1,13 @@
 using Godot;
 using XGeneric.Inventory;
+using XGeneric.Statistic;
 
 public partial class PlayerControler : Node3D, HealthSystem
 {
 	[Export] public float staminaMax = 10;
 	UIGameplay uIGameplay;
 	public Inventory playerInventory;
+	public StatsSystem stats;
 
 	#region HealthSystem
 	[Export] public int maxHealth = 1;

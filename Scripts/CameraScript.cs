@@ -8,6 +8,8 @@ public partial class CameraScript : Node3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Position = Position.Lerp(followTarget.GlobalPosition, lerpSpeed);
+		float lerpValue = 1 - (float)Mathf.Pow(0.5f, delta *lerpSpeed);
+	
+		Position = Position.Lerp(followTarget.GlobalPosition, lerpValue);
 	}
 }

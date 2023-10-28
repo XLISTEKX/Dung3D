@@ -92,13 +92,13 @@ public partial class PlayerMovement : CharacterBody3D
 		MoveAndSlide();
 		HandleAnimations();
 	}
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        if(@event is InputEventMouseButton press && press.ButtonIndex == MouseButton.Left && press.Pressed)
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if(@event is InputEventMouseButton press && press.ButtonIndex == MouseButton.Left && press.Pressed)
 		{
 			rotationDirection = ScreenToWorldPoint(press.Position);
 		}
-    }
+	}
 	//Rotates player to given position in World + deltaTime to handle lerp
 	void RotatePlayer(Vector3 vectorToLook, float delta = 1)
 	{
@@ -106,6 +106,7 @@ public partial class PlayerMovement : CharacterBody3D
 		look.Y = 0;
 		
 		float angle = look.SignedAngleTo(new Vector3(0,0,1), new Vector3(0,-1,0));
+		
 		model.Rotation = new(0,Mathf.LerpAngle(model.Rotation.Y, angle, rotationSpeed * delta), 0);
 	}
 	//Static func to get Point in space by Screen point

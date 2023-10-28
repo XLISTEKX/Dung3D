@@ -12,12 +12,12 @@ public partial class InventoryUI : CanvasLayer
 	{
 		inventory = playerControler.playerInventory;
 		
-		foreach(InvItem item in inventory.items)
+		for(int i = 0; i < inventory.items.Length; i++)
 		{
 			Slot temp = slot.Instantiate<Slot>();
 			slotTransform.AddChild(temp);
-			
-			temp.InitSlot(item);
+			temp.Name = "Slot" + i;
+			temp.InitSlot(inventory.items[i]);
 		}
 	}
 
