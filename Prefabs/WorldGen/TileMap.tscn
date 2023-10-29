@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtwvmendpv3y4"]
+
+[ext_resource type="TileSet" uid="uid://cgms7ker80ju2" path="res://Assets/Environment/WorldGen/Ground_Tileset.tres" id="1_8ytho"]
+[ext_resource type="Script" path="res://Scripts/WorldGen/lowResOpenSimplex.cs" id="2_cuyy8"]
+
+[node name="TileMap" type="TileMap" node_paths=PackedStringArray("tileMap")]
+texture_filter = 1
+tile_set = ExtResource("1_8ytho")
+cell_quadrant_size = 8
+format = 2
+layer_0/name = "Ground"
+script = ExtResource("2_cuyy8")
+width = 196
+height = 72
+tileMap = NodePath(".")
