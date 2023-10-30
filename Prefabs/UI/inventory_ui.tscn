@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/UI/InventoryUI.cs" id="1_a6k78"]
 [ext_resource type="FontFile" uid="uid://br3t28ge8ogyy" path="res://Fonts/PixelSans/PixelifySans-Bold.ttf" id="2_ih1wg"]
-[ext_resource type="PackedScene" uid="uid://bdob34khy1ag0" path="res://Prefabs/slot.tscn" id="2_ntwwv"]
+[ext_resource type="PackedScene" uid="uid://bdob34khy1ag0" path="res://Prefabs/UI/slot.tscn" id="2_ntwwv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ndfyf"]
 

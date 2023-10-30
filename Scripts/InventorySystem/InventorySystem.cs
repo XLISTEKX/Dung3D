@@ -26,22 +26,15 @@ namespace XGeneric.Inventory
 	
 		public static Color GetColorByRarity(RarityTypes rarity)
 		{
-			switch(rarity)
-			{
-				case RarityTypes.Common:
-					return new Color(110 / 255f, 110 / 255f, 110 / 255f);
-				case RarityTypes.Unrare:
-					return new Color(0,1,0);
-				case RarityTypes.Rare:
-					return new Color(0,0,1);
-				case RarityTypes.Epic:
-					return new Color(102 / 255f, 0, 212 / 255f);
-				case RarityTypes.Legendery:
-					return new Color(1, 1, 0);
-					
-				default:
-					return new Color(0,0,0);
-			}
-		}
+            return rarity switch
+            {
+                RarityTypes.Common => new Color(110 / 255f, 110 / 255f, 110 / 255f),
+                RarityTypes.Unrare => new Color(0, 1, 0),
+                RarityTypes.Rare => new Color(0, 0, 1),
+                RarityTypes.Epic => new Color(102 / 255f, 0, 212 / 255f),
+                RarityTypes.Legendery => new Color(1, 1, 0),
+                _ => new Color(0, 0, 0),
+            };
+        }
 	}
 }

@@ -6,12 +6,17 @@ public partial class Slot : Panel
 {
 	[Export] Label Quantity;
 	
-	[Export] TextureRect Icon, Quality;
+	[Export] public TextureRect Icon, Quality;
+	
+	InventoryUI inventoryUI;
+	public int slotID;
 	
 	bool isDraged = false;
 	
-	public void InitSlot(InvItem item)
+	public void InitSlot(InvItem item, InventoryUI inventoryUI, int id)
 	{
+		this.inventoryUI = inventoryUI;
+		slotID = id;
 		if(item == null)
 		{
 			Quantity.Visible = false;
@@ -26,29 +31,52 @@ public partial class Slot : Panel
 		Quality.Modulate = InventorySystem.GetColorByRarity(item.rarity);
 	}
 
+	public void UpdateSlot(InvItem item)
+	{
+		if(item == null)
+		{
+			Quantity.Visible = false;
+			Icon.Visible = false;
+			Quality.Visible = false;
+			return;
+		}
+		
+		Icon.Visible = true;
+		Quality.Visible = true;
+		Icon.Texture = item.ItemIcon;
+		Quality.Modulate = InventorySystem.GetColorByRarity(item.rarity);
+	}
+	
+
 	public override void _GuiInput(InputEvent @event)
 	{
 		base._GuiInput(@event);
 		
-		// if(@event is InputEventMouseButton click && click.Pressed)
-		// {
-		// 	GD.Print("Clicked: " + Name);
-		// 	isDraged = true;
+		if(@event is InputEventMouseButton click && click.Pressed)
+		{
+			isDraged = true;
+		}
+		else if(@event is InputEventMouseButton click2 && !click2.Pressed)
+		{
+			inventoryUI.EndDrag();
+		}
+		else if(@event is InputEventMouseMotion move) 
+		{
+			if(!isDraged)
+				return;
 			
-			
-		// }
-		// else if(@event is InputEventMouseButton click2 && !click2.Pressed)
-		// {
-		// 	GD.Print("UnClicked: " + Name);
-		// 	isDraged = false;
-		// }
-		// else if(@event is InputEventMouseMotion move)
-		// {
-		// 	if(!isDraged)
-		// 		return;
-			
-		// 	GetChild<Control>(0).GlobalPosition = move.GlobalPosition;
-			
-		// }
+			inventoryUI.BeginDrag(this);
+			isDraged = false;
+		}
+	}
+	
+	public void OnMouseEnter()
+	{
+		inventoryUI.UpdateHoveredDrag(this, true);
+	}
+	
+	public void OnMouseExit()
+	{
+		inventoryUI.UpdateHoveredDrag(this, false);
 	}
 }

@@ -26,7 +26,6 @@ public partial class lowResOpenSimplex : TileMap
 
 		noise.FractalOctaves = 1;
 		noise.FractalGain = 0;
-		noise.
 	}
 
 	private void CreateBase() {

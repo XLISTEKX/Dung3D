@@ -32,5 +32,13 @@ namespace XGeneric.Inventory
 		{
 			items[ID] = null;
 		}
+		
+		public void ReplaceItem(int firstID, int secID)
+		{
+			InvItem tempItem = items[firstID];
+			
+			items[firstID] = items[secID];
+			items[secID] = tempItem;
+		}
 	}
 }
