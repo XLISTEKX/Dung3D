@@ -5,44 +5,35 @@ public partial class lowResOpenSimplex : TileMap
 {
 
 	public FastNoiseLite noise = new();
-	[Export] public int width;
-	[Export] public int height;
-	[Export] public float terrainCap;
+	[Export] public int size;
+	[Export] public float creationThreshold;
+	
 	
 	[Export] TileMap tileMap;
+	Vector2I baseAtlas = new(24,12);
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		noise.NoiseType = FastNoiseLite.NoiseTypeEnum.Simplex;
+		ApplyNoiseSettings();
 		CreateBase();
 	}
 
-	private void GenerateWorld()
+	private void ApplyNoiseSettings()
 	{
 		//RandomNumberGenerator seed = new();
 		//seed.Randomize();
 		//noise.Seed = seed.RandiRange(0, 42170);
-
+		noise.NoiseType = FastNoiseLite.NoiseTypeEnum.Simplex;
 		noise.FractalOctaves = 1;
 		noise.FractalGain = 0;
+		noise.Frequency = 0.12f;
 	}
 
 	private void CreateBase() {
-		float noiseVal;
-		Godot.Collections.Array<Vector2I> vectorArr = new Godot.Collections.Array<Vector2I>();
-		for(int i = 0; i < width; i++)
+		int i = 0;
+		foreach (Vector2I item in MapArray.CreateMapArray(noise, size, creationThreshold))
 		{
-			for(int j = 0; j < height; j++)
-			{
-				noiseVal = noise.GetNoise2D(i, j);
-				if(noiseVal < terrainCap)
-				{
-					SetCell(0, new(i, j), 0, new(24,12));
-					vectorArr.Add(new(i, j));
-				}
-			}
+			SetCell(0, new(item.X, item.Y), 3, baseAtlas, 0);
 		}
-		tileMap.SetCellsTerrainConnect(0, vectorArr, 0, 0, true);
 	}
 }
