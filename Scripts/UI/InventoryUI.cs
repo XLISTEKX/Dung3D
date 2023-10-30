@@ -51,7 +51,7 @@ public partial class InventoryUI : CanvasLayer
 		{
 			Size = initSlot.Icon.Size,
 			Texture = initSlot.Icon.Texture,
-			Position = initSlot.Icon.Position,
+			Position = GetViewport().GetMousePosition() - initSlot.Icon.Size / 2,
 			MouseFilter = Control.MouseFilterEnum.Ignore,
 			PivotOffset = initSlot.Icon.Size / 2
 			
@@ -87,6 +87,9 @@ public partial class InventoryUI : CanvasLayer
 	
 	public void EndDrag()
 	{
+		if(initSlot == null)
+		 	return;
+		
 		isDraging = false;
 
 		dragObject.QueueFree();

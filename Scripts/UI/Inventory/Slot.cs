@@ -52,13 +52,17 @@ public partial class Slot : Panel
 	{
 		base._GuiInput(@event);
 		
-		if(@event is InputEventMouseButton click && click.Pressed)
+		if(!Icon.Visible)
+			return;
+		
+		if(@event is InputEventMouseButton click && click.Pressed && click.ButtonIndex == MouseButton.Left)
 		{
 			isDraged = true;
 		}
-		else if(@event is InputEventMouseButton click2 && !click2.Pressed)
+		else if(@event is InputEventMouseButton click2 && !click2.Pressed && click2.ButtonIndex == MouseButton.Left)
 		{
 			inventoryUI.EndDrag();
+			isDraged = false;
 		}
 		else if(@event is InputEventMouseMotion move) 
 		{
