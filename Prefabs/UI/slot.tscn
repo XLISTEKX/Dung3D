@@ -56,3 +56,6 @@ text = "_ph
 label_settings = SubResource("LabelSettings_g5pax")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]
+[connection signal="mouse_exited" from="." to="." method="OnMouseExit"]
