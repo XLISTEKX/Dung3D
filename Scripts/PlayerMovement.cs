@@ -38,7 +38,7 @@ public partial class PlayerMovement : CharacterBody3D
 	{
 		base._PhysicsProcess(delta);
 
-		Vector3 moveDirection = left * (Input.GetActionStrength("Right") - Input.GetActionStrength("Left")) + forward * (Input.GetActionStrength("Back") - Input.GetActionStrength("Forward"));
+		Vector3 moveDirection = (left * (Input.GetActionStrength("Right") - Input.GetActionStrength("Left")) + forward * (Input.GetActionStrength("Back") - Input.GetActionStrength("Forward"))).Normalized();
 
 		float sprintStrenght = Input.GetActionStrength("Sprint"), tempMoveSpeed = movementSpeed;
 

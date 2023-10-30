@@ -18,7 +18,7 @@ public partial class lowResOpenSimplex : TileMap
 		CreateBase();
 	}
 
-	public void GenerateWorld()
+	private void GenerateWorld()
 	{
 		//RandomNumberGenerator seed = new();
 		//seed.Randomize();
@@ -26,7 +26,6 @@ public partial class lowResOpenSimplex : TileMap
 
 		noise.FractalOctaves = 1;
 		noise.FractalGain = 0;
-		noise.
 	}
 
 	private void CreateBase() {
