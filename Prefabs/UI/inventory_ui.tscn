@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxxehy12xcth6"]
+[gd_scene load_steps=19 format=3 uid="uid://cxxehy12xcth6"]
 
 [ext_resource type="Script" path="res://Scripts/UI/InventoryUI.cs" id="1_a6k78"]
 [ext_resource type="PackedScene" uid="uid://bdob34khy1ag0" path="res://Prefabs/UI/slot.tscn" id="2_ntwwv"]
+[ext_resource type="FontFile" uid="uid://br3t28ge8ogyy" path="res://Fonts/PixelSans/PixelifySans-Bold.ttf" id="4_ibcdg"]
+[ext_resource type="Texture2D" uid="uid://d333bruwil1q3" path="res://Sprites/Sprite_Coin.png" id="5_alvan"]
 [ext_resource type="FontFile" uid="uid://j31ty2youqm3" path="res://Fonts/PixelSans/PixelifySans-Medium.ttf" id="5_lfrs7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqsfl"]
@@ -29,11 +31,30 @@ line_spacing = 5.0
 font = ExtResource("5_lfrs7")
 font_size = 32
 
+[sub_resource type="LabelSettings" id="LabelSettings_lvgt2"]
+font = ExtResource("4_ibcdg")
+font_size = 25
+font_color = Color(1, 0.882353, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cobyp"]
+font = ExtResource("5_lfrs7")
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_2wom5"]
+font = ExtResource("4_ibcdg")
+font_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2s0kh"]
+bg_color = Color(1, 1, 1, 0.196078)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbxj4"]
+bg_color = Color(0, 1, 0, 1)
+
 [node name="InventoryUI" type="CanvasLayer" node_paths=PackedStringArray("slotTransform", "cashLabel")]
 script = ExtResource("1_a6k78")
 slot = ExtResource("2_ntwwv")
 slotTransform = NodePath("InventoryContent/TabContainer/S/ScrollContainer/GridContainer")
-cashLabel = NodePath("")
+cashLabel = NodePath("TopPanel/HBoxContainer/HBoxContainer/Label")
 
 [node name="InventoryContent" type="Control" parent="."]
 layout_mode = 3
@@ -93,7 +114,7 @@ color = Color(0, 0, 0, 0.588235)
 [node name="Tabs" type="HBoxContainer" parent="TopPanel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.7
+anchor_right = 0.65
 anchor_bottom = 1.0
 alignment = 2
 
@@ -127,6 +148,69 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TopPanel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.65
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="TopPanel/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "10000"
+label_settings = SubResource("LabelSettings_lvgt2")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TopPanel/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+texture = ExtResource("5_alvan")
+expand_mode = 2
+
+[node name="Control" type="Control" parent="TopPanel/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TopPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label2" type="Label" parent="TopPanel/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "LEVEL
+"
+label_settings = SubResource("LabelSettings_cobyp")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="TopPanel/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "0
+"
+label_settings = SubResource("LabelSettings_2wom5")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="TopPanel/HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="TopPanel/HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 15)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_2s0kh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fbxj4")
+value = 50.0
+show_percentage = false
+
+[node name="Control2" type="Control" parent="TopPanel/HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
