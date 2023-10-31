@@ -10,12 +10,13 @@ public partial class lowResOpenSimplex : TileMap
 	
 	
 	[Export] TileMap tileMap;
-	Vector2I baseAtlas = new(24,12);
+	Vector2I baseAtlas = new(24,12);	//Coordinates of a brown tile in the tileset
 
 	public override void _Ready()
 	{
 		ApplyNoiseSettings();
 		CreateBase();
+		UpdateAutoTile();
 	}
 
 	private void ApplyNoiseSettings()
@@ -29,11 +30,16 @@ public partial class lowResOpenSimplex : TileMap
 		noise.Frequency = 0.12f;
 	}
 
-	private void CreateBase() {
-		int i = 0;
+	private void CreateBase() 
+	{
 		foreach (Vector2I item in MapArray.CreateMapArray(noise, size, creationThreshold))
 		{
 			SetCell(0, new(item.X, item.Y), 3, baseAtlas, 0);
 		}
+	}
+
+	private void UpdateAutoTile() 
+	{
+		tileMap.SetCellsTerrainConnect(0, MapArray.CreateMapArray(noise, size, creationThreshold), 0, 0, true);
 	}
 }
