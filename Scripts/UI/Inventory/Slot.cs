@@ -52,7 +52,7 @@ public partial class Slot : Panel
 	{
 		base._GuiInput(@event);
 		
-		if(!Icon.Visible)
+		if(!Icon.Visible) 
 			return;
 		
 		if(@event is InputEventMouseButton click && click.Pressed && click.ButtonIndex == MouseButton.Left)

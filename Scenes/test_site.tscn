@@ -185,17 +185,6 @@ shape = SubResource("BoxShape3D_20kpl")
 [node name="Cardboard" parent="KLoc2/CollisionShape3D" instance=ExtResource("8_tgbxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="KLoc" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2326, 0.941036, 4.79162)
-collision_layer = 4
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KLoc"]
-shape = SubResource("BoxShape3D_20kpl")
-
-[node name="Cardboard" parent="KLoc/CollisionShape3D" instance=ExtResource("8_tgbxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
 [node name="proto-gltf" parent="." instance=ExtResource("2_obq2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76538, 0)
 
@@ -204,5 +193,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5)
 
 [node name="Bomba" parent="." instance=ExtResource("8_rgwk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.789, 0, 5.771)
+
+[node name="KLoc3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5459, 3.94439, 5.65046)
+collision_layer = 4
+collision_mask = 7
+mass = 1000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KLoc3"]
+shape = SubResource("BoxShape3D_20kpl")
+
+[node name="Cardboard" parent="KLoc3/CollisionShape3D" instance=ExtResource("8_tgbxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [connection signal="pressed" from="UI/Gameplay/InvButton" to="UI" method="OpenInventory"]

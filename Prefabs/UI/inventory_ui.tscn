@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxxehy12xcth6"]
+[gd_scene load_steps=13 format=3 uid="uid://cxxehy12xcth6"]
 
 [ext_resource type="Script" path="res://Scripts/UI/InventoryUI.cs" id="1_a6k78"]
 [ext_resource type="FontFile" uid="uid://br3t28ge8ogyy" path="res://Fonts/PixelSans/PixelifySans-Bold.ttf" id="2_ih1wg"]
 [ext_resource type="PackedScene" uid="uid://bdob34khy1ag0" path="res://Prefabs/UI/slot.tscn" id="2_ntwwv"]
+[ext_resource type="Texture2D" uid="uid://d333bruwil1q3" path="res://Sprites/Sprite_Coin.png" id="4_h6d7l"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ndfyf"]
 
@@ -26,19 +27,25 @@ font = ExtResource("2_ih1wg")
 font_size = 32
 font_color = Color(0, 0, 0, 0.686275)
 
-[node name="InventoryUI" type="CanvasLayer" node_paths=PackedStringArray("slotTransform")]
+[sub_resource type="LabelSettings" id="LabelSettings_5gw21"]
+font = ExtResource("2_ih1wg")
+font_size = 20
+font_color = Color(1, 0.882353, 0, 1)
+
+[node name="InventoryUI" type="CanvasLayer" node_paths=PackedStringArray("slotTransform", "cashLabel")]
 script = ExtResource("1_a6k78")
 slot = ExtResource("2_ntwwv")
-slotTransform = NodePath("Control/TabContainer/S/ScrollContainer/GridContainer")
+slotTransform = NodePath("InventoryContent/TabContainer/S/ScrollContainer/GridContainer")
+cashLabel = NodePath("TopPanel/CashIcon/Cash")
 
-[node name="Control" type="Control" parent="."]
+[node name="InventoryContent" type="Control" parent="."]
 layout_mode = 3
-anchor_left = 0.3
+anchor_left = 0.1
 anchor_top = 0.1
-anchor_right = 0.7
+anchor_right = 0.5
 anchor_bottom = 0.9
 
-[node name="TabContainer" type="TabContainer" parent="Control"]
+[node name="TabContainer" type="TabContainer" parent="InventoryContent"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,10 +55,10 @@ grow_horizontal = 2
 grow_vertical = 2
 tabs_visible = false
 
-[node name="S" type="Control" parent="Control/TabContainer"]
+[node name="S" type="Control" parent="InventoryContent/TabContainer"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/TabContainer/S"]
+[node name="ScrollContainer" type="ScrollContainer" parent="InventoryContent/TabContainer/S"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -66,19 +73,56 @@ grow_vertical = 2
 theme = SubResource("Theme_xe8w3")
 horizontal_scroll_mode = 0
 
-[node name="GridContainer" type="GridContainer" parent="Control/TabContainer/S/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="InventoryContent/TabContainer/S/ScrollContainer"]
 process_mode = 3
 layout_mode = 2
 columns = 4
 
-[node name="Label" type="Label" parent="."]
-anchors_preset = 5
+[node name="TopPanel" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.1
+
+[node name="Label" type="Label" parent="TopPanel"]
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -162.0
-offset_top = 10.0
+offset_top = -21.0
 offset_right = 162.0
-offset_bottom = 52.0
+offset_bottom = 21.0
 grow_horizontal = 2
+grow_vertical = 2
 text = "There is no Escape !?"
 label_settings = SubResource("LabelSettings_wsxau")
+
+[node name="CashIcon" type="TextureRect" parent="TopPanel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -15.0
+offset_right = -12.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("4_h6d7l")
+
+[node name="Cash" type="Label" parent="TopPanel/CashIcon"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_right = 1.0
+grow_vertical = 2
+text = "_ph"
+label_settings = SubResource("LabelSettings_5gw21")
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 3

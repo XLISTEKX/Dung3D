@@ -1,5 +1,3 @@
-
-
 using Godot;
 
 namespace XGeneric.Inventory
@@ -8,6 +6,8 @@ namespace XGeneric.Inventory
 	{
 		public InvItem[] items;
 		public int size;
+		
+		public uint cash = 1000;
 
 		public Inventory(int InventorySize)
 		{

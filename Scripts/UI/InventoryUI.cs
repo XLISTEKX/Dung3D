@@ -6,6 +6,7 @@ public partial class InventoryUI : CanvasLayer
 {
 	[Export] PackedScene slot;
 	[Export] GridContainer slotTransform;
+	[Export] Label cashLabel;
 	
 	Inventory inventory;
 	
@@ -26,6 +27,7 @@ public partial class InventoryUI : CanvasLayer
 			temp.InitSlot(inventory.items[i], this, i);
 
 		}
+		cashLabel.Text = inventory.cash.ToString();
 	}
 	public override void _Input(InputEvent @event)
 	{
@@ -59,6 +61,7 @@ public partial class InventoryUI : CanvasLayer
 
 		AddChild(dragObject);
 
+		initSlot.Icon.Modulate -= new Color(0,0,0, 0.5f);
 	}
 	public void UpdateHoveredDrag(Slot hovered, bool enter)
 	{
@@ -79,12 +82,6 @@ public partial class InventoryUI : CanvasLayer
 		
 	}
 	
-	public void UpdateSlot(int ID)
-	{
-		Slot slot = slotTransform.GetChild<Slot>(ID);
-		slot.InitSlot(inventory.items[ID], this, ID);
-	}
-	
 	public void EndDrag()
 	{
 		if(initSlot == null)
@@ -94,7 +91,7 @@ public partial class InventoryUI : CanvasLayer
 
 		dragObject.QueueFree();
 		dragObject = null;
-		
+		initSlot.Icon.Modulate += new Color(0,0,0, 0.5f);
 		if(hoveredSlot != null)
 		{
 			inventory.ReplaceItem(initSlot.slotID, hoveredSlot.slotID);
