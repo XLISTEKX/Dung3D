@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtwvmendpv3y4"]
 
 [ext_resource type="TileSet" uid="uid://cgms7ker80ju2" path="res://Assets/Environment/WorldGen/Ground_Tileset.tres" id="1_8ytho"]
-[ext_resource type="Script" path="res://Scripts/WorldGen/lowResOpenSimplex.cs" id="2_cuyy8"]
+[ext_resource type="Script" path="res://Scripts/WorldGen/CreateTileMapBase.cs" id="2_cubbw"]
 
 [node name="TileMap" type="TileMap" node_paths=PackedStringArray("tileMap")]
 texture_filter = 1
@@ -9,8 +9,7 @@ tile_set = ExtResource("1_8ytho")
 cell_quadrant_size = 8
 format = 2
 layer_0/name = "Ground"
-script = ExtResource("2_cuyy8")
+script = ExtResource("2_cubbw")
 creationSize = 32
-creationThreshold = 0.3
 creationRadius = 16.0
 tileMap = NodePath(".")

@@ -18,7 +18,7 @@ public static class MapArray
         }
         return vectorArr;
     }
-    //Ziuuuuu loops through two arrays and reads the level based on noise and it's threshold
+    //loops through two arrays and reads the level based on noise and it's threshold
     //creates a Vector2I array with coordinates of existing fields
 
     public static Godot.Collections.Array<Vector2I> CreateMapArrayCircular(FastNoiseLite noise, int size, float generationThreshold, float radius) 
@@ -33,6 +33,19 @@ public static class MapArray
                 {
                     vectorArr.Add(new(i,j));
                 }
+            }
+        }
+        return vectorArr;
+    }
+
+    public static Godot.Collections.Array<Vector2I> CreateArrayOnTop(Godot.Collections.Array<Vector2I> inputArray, FastNoiseLite noise, float generationThreshold)
+    {
+        Godot.Collections.Array<Vector2I> vectorArr = new Godot.Collections.Array<Vector2I>();
+        foreach (Vector2I item in inputArray)
+        {
+            if(noise.GetNoise2D(item.X, item.Y) > generationThreshold)
+            {
+                vectorArr.Add(new(item.X, item.Y));
             }
         }
         return vectorArr;
