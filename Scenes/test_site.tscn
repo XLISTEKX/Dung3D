@@ -153,6 +153,17 @@ texture_focused = ExtResource("6_fvpr8")
 stretch_mode = 5
 
 [node name="Panel" parent="UI" instance=ExtResource("2_tyqye")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -176,7 +187,7 @@ shape = SubResource("WorldBoundaryShape3D_nl7aa")
 [node name="KLoc2" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.68341, 3.94439, 5.65046)
 collision_layer = 4
-collision_mask = 7
+collision_mask = 15
 mass = 1000.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KLoc2"]
@@ -197,7 +208,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.789, 0, 5.771)
 [node name="KLoc3" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5459, 3.94439, 5.65046)
 collision_layer = 4
-collision_mask = 7
+collision_mask = 15
 mass = 1000.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KLoc3"]
