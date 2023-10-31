@@ -1,4 +1,3 @@
-using System.Reflection;
 using Godot;
 using XGeneric.Utilities;
 
@@ -11,6 +10,9 @@ public partial class EnemyAI : CharacterBody3D, HealthSystem
 	Vector3 targetPosition;
 	Timer timer;
 	int health = 5;
+	
+	bool dead = false;
+	
 	public int Health 
 	{
 		get
@@ -28,23 +30,31 @@ public partial class EnemyAI : CharacterBody3D, HealthSystem
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector3 moveDirection = (targetPosition - GlobalPosition).Normalized();
-		moveDirection *= movementSpeed;
-		moveDirection.Y = 0;
-		if(moveDirection != Vector3.Zero)
+		if(dead)
+			return;
+		
+		Vector3 moveDirection = targetPosition - GlobalPosition;
+		
+		if(moveDirection.Length() <= 0.75f)
 		{
-			tree.Set("parameters/conditions/isIdle", false);
-			tree.Set("parameters/conditions/isWalking", true);
-		}
-		else
-		{
+			moveDirection = Vector3.Zero;
 			tree.Set("parameters/conditions/isIdle", true);
 			tree.Set("parameters/conditions/isWalking", false);
 		}
-		//MoveAndCollide(moveDirection * (float)delta);
+		else
+		{
+			moveDirection = moveDirection.Normalized();
+			moveDirection *= movementSpeed;
+			moveDirection.Y = 0;
+			
+			tree.Set("parameters/conditions/isIdle", false);
+			tree.Set("parameters/conditions/isWalking", true);
+		}
 		
-		Velocity = moveDirection;
-		MoveAndSlide();
+		MoveAndCollide(moveDirection * (float)delta);
+		
+		//Velocity = moveDirection;
+		//MoveAndSlide();
 		RotateBody((float) delta);
 	}
 
@@ -84,9 +94,14 @@ public partial class EnemyAI : CharacterBody3D, HealthSystem
 	
 	public void Dead()
 	{
+		dead = true;
 		tree.Set("parameters/conditions/isDead", true);
-		//wait till animation finishes?
-		//QueueFree();
+	}
+	
+	public void AnimFinish(string animName)
+	{
+		if(animName == "death")
+			QueueFree();
 	}
 
 }
