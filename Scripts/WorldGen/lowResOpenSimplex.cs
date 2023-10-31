@@ -5,12 +5,15 @@ public partial class lowResOpenSimplex : TileMap
 {
 
 	public FastNoiseLite noise = new();
-	[Export] public int size;
+	[Export] public int creationSize;
 	[Export] public float creationThreshold;
+	[Export] public float creationRadius;
 	
 	
 	[Export] TileMap tileMap;
 	Vector2I baseAtlas = new(24,12);	//Coordinates of a brown tile in the tileset
+
+	Godot.Collections.Array<Vector2I> mapArray;
 
 	public override void _Ready()
 	{
@@ -21,9 +24,9 @@ public partial class lowResOpenSimplex : TileMap
 
 	private void ApplyNoiseSettings()
 	{
-		//RandomNumberGenerator seed = new();
-		//seed.Randomize();
-		//noise.Seed = seed.RandiRange(0, 42170);
+		RandomNumberGenerator seed = new();
+		seed.Randomize();
+		noise.Seed = seed.RandiRange(0, 42170);
 		noise.NoiseType = FastNoiseLite.NoiseTypeEnum.Simplex;
 		noise.FractalOctaves = 1;
 		noise.FractalGain = 0;
@@ -32,7 +35,7 @@ public partial class lowResOpenSimplex : TileMap
 
 	private void CreateBase() 
 	{
-		foreach (Vector2I item in MapArray.CreateMapArray(noise, size, creationThreshold))
+		foreach (Vector2I item in MapArray.CreateMapArrayCircular(noise, creationSize, creationThreshold, creationRadius))
 		{
 			SetCell(0, new(item.X, item.Y), 3, baseAtlas, 0);
 		}
@@ -40,6 +43,6 @@ public partial class lowResOpenSimplex : TileMap
 
 	private void UpdateAutoTile() 
 	{
-		tileMap.SetCellsTerrainConnect(0, MapArray.CreateMapArray(noise, size, creationThreshold), 0, 0, true);
+		tileMap.SetCellsTerrainConnect(0, MapArray.CreateMapArrayCircular(noise, creationSize, creationThreshold, creationRadius), 0, 0, true);
 	}
 }
