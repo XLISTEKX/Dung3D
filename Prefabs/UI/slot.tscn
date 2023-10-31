@@ -13,7 +13,7 @@ font = ExtResource("2_7pci4")
 font_size = 24
 
 [node name="Slot" type="Panel" node_paths=PackedStringArray("Quantity", "Icon", "Quality")]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(75, 75)
 layout_direction = 2
 offset_right = 100.0
 offset_bottom = 100.0

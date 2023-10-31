@@ -21,7 +21,7 @@ public partial class Slot : Panel
 		{
 			Quantity.Visible = false;
 			Icon.Visible = false;
-			Quality.Visible = false;
+			Quality.Modulate = new(0.5f,0.5f,0.5f);
 			return;
 		}
 		
@@ -37,7 +37,7 @@ public partial class Slot : Panel
 		{
 			Quantity.Visible = false;
 			Icon.Visible = false;
-			Quality.Visible = false;
+			Quality.Modulate = new(0.5f,0.5f,0.5f);
 			return;
 		}
 		

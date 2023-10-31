@@ -33,7 +33,7 @@ namespace XGeneric.Inventory
                 RarityTypes.Rare => new Color(0, 0, 1),
                 RarityTypes.Epic => new Color(102 / 255f, 0, 212 / 255f),
                 RarityTypes.Legendery => new Color(1, 1, 0),
-                _ => new Color(0, 0, 0),
+                _ => new Color(1, 1, 1),
             };
         }
 	}
