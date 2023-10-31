@@ -2,7 +2,7 @@ using System.Reflection;
 using Godot;
 using XGeneric.Utilities;
 
-public partial class EnemyAI : RigidBody3D, HealthSystem
+public partial class EnemyAI : CharacterBody3D, HealthSystem
 {
 	[Export] float timeToLook = 1;
 	[Export] float movementSpeed = 10;
@@ -41,7 +41,10 @@ public partial class EnemyAI : RigidBody3D, HealthSystem
 			tree.Set("parameters/conditions/isIdle", true);
 			tree.Set("parameters/conditions/isWalking", false);
 		}
-		MoveAndCollide(moveDirection * (float)delta);
+		//MoveAndCollide(moveDirection * (float)delta);
+		
+		Velocity = moveDirection;
+		MoveAndSlide();
 		RotateBody((float) delta);
 	}
 
@@ -83,7 +86,7 @@ public partial class EnemyAI : RigidBody3D, HealthSystem
 	{
 		tree.Set("parameters/conditions/isDead", true);
 		//wait till animation finishes?
-		QueueFree();
+		//QueueFree();
 	}
 
 }
