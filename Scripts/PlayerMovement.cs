@@ -16,7 +16,8 @@ public partial class PlayerMovement : CharacterBody3D
 
 	Vector3 forward, left, rotationDirection;
 
-	private bool isIdle, isWalking, isSprinting, isTurningLeft, isTurningRight;
+	private bool isIdle, isWalking, isSprinting;
+	//private bool isTurningLeft, isTurningRight;
 	//For animation mostly
 
 	public override void _Ready()
@@ -123,7 +124,7 @@ public partial class PlayerMovement : CharacterBody3D
 		tree.Set("parameters/conditions/idle", isIdle);
 		tree.Set("parameters/conditions/walk", isWalking);
 		tree.Set("parameters/conditions/sprint", isSprinting);
-		tree.Set("parameters/conditions/leftTurn", isTurningLeft);
-		tree.Set("parameters/conditions/rightTurn", isTurningRight);
+		//tree.Set("parameters/conditions/leftTurn", isTurningLeft);
+		//tree.Set("parameters/conditions/rightTurn", isTurningRight);
 	}
 }

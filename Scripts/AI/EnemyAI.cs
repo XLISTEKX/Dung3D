@@ -1,3 +1,4 @@
+using System.Reflection;
 using Godot;
 using XGeneric.Utilities;
 
@@ -5,6 +6,7 @@ public partial class EnemyAI : RigidBody3D, HealthSystem
 {
 	[Export] float timeToLook = 1;
 	[Export] float movementSpeed = 10;
+	[Export] AnimationTree tree;
 	Node3D target;
 	Vector3 targetPosition;
 	Timer timer;
@@ -29,7 +31,16 @@ public partial class EnemyAI : RigidBody3D, HealthSystem
 		Vector3 moveDirection = (targetPosition - GlobalPosition).Normalized();
 		moveDirection *= movementSpeed;
 		moveDirection.Y = 0;
-		
+		if(moveDirection != Vector3.Zero)
+		{
+			tree.Set("parameters/conditions/isIdle", false);
+			tree.Set("parameters/conditions/isWalking", true);
+		}
+		else
+		{
+			tree.Set("parameters/conditions/isIdle", true);
+			tree.Set("parameters/conditions/isWalking", false);
+		}
 		MoveAndCollide(moveDirection * (float)delta);
 		RotateBody((float) delta);
 	}
@@ -70,6 +81,8 @@ public partial class EnemyAI : RigidBody3D, HealthSystem
 	
 	public void Dead()
 	{
+		tree.Set("parameters/conditions/isDead", true);
+		//wait till animation finishes?
 		QueueFree();
 	}
 
