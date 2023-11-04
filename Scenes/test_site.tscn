@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b3ra6chicawpd"]
+[gd_scene load_steps=25 format=3 uid="uid://b3ra6chicawpd"]
 
 [ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="1_xa4d3"]
 [ext_resource type="Script" path="res://Scripts/UI/UIManager.cs" id="2_jvsvf"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dlvjkuewyofm5" path="res://Prefabs/Bomba.tscn" id="8_rgwk1"]
 [ext_resource type="PackedScene" uid="uid://c25wx5tcdsgv0" path="res://Assets/Environment/Stuff/Cardboard.glb" id="8_tgbxs"]
 [ext_resource type="PackedScene" uid="uid://dsx67vggol7h" path="res://Prefabs/Items/World/test_item.tscn" id="13_lhep3"]
+[ext_resource type="PackedScene" uid="uid://w28dfgynbfx5" path="res://Prefabs/chest.tscn" id="14_miwkr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e5rq8"]
 font = ExtResource("2_xllyw")
@@ -238,5 +239,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.443065, 0.602745, 13.0676)
 
 [node name="TestItem3" parent="." instance=ExtResource("13_lhep3")]
 transform = Transform3D(0.83663, 0, 0.547768, 0, 1, 0, -0.547768, 0, 0.83663, -2.31488, 0.602745, 11.8753)
+
+[node name="Chest" parent="." instance=ExtResource("14_miwkr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.492702, 6)
 
 [connection signal="pressed" from="UI/Gameplay/InvButton" to="UI" method="OpenInventory"]
