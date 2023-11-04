@@ -1,14 +1,17 @@
+using System.Collections.Generic;
 using Godot;
 using XGeneric.Inventory;
 using XGeneric.Statistic;
 
-public partial class PlayerControler : Node3D, HealthSystem
+public partial class PlayerControler : Node3D, HealthSystem, IInventory
 {
 	[Export] public float staminaMax = 10;
 	UIGameplay uIGameplay;
-	public Inventory playerInventory;
+	Inventory playerInventory;
 	public StatsSystem stats;
 
+	List<WorldItem> itemsToPickUp;
+	
 	#region HealthSystem
 	[Export] public int maxHealth = 1;
 	int health = 10;
@@ -40,6 +43,18 @@ public partial class PlayerControler : Node3D, HealthSystem
 		UpdateUI();
 	}
 
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if(@event is InputEventKey key && key.KeyLabel == Key.E && key.Pressed)
+		{
+			if(itemsToPickUp == null)
+				return;
+			
+			playerInventory.AddItem(itemsToPickUp[0].item);
+			Node3D item = itemsToPickUp[0];
+			item.QueueFree();
+		}
+	}
 	public void UpdateUI()
 	{
 		uIGameplay.UpdateHealth(health);
@@ -67,7 +82,8 @@ public partial class PlayerControler : Node3D, HealthSystem
 		
 		uIGameplay.UpdateStamina(stamina);
 	}
-
+	
+	#region Health Interface
 	public void TakeDamage(int damage)
 	{
 		health -= damage;
@@ -82,4 +98,37 @@ public partial class PlayerControler : Node3D, HealthSystem
 	{
 		
 	}
+	#endregion
+
+	#region Inventory Interface
+	public Inventory GetInventory()
+	{
+		return playerInventory;
+	}
+
+	public void AddToPickUp(WorldItem worldItem)
+	{
+		if(itemsToPickUp == null)
+		{
+			itemsToPickUp = new()
+			{
+				worldItem
+			};
+		}
+		else
+		{
+			itemsToPickUp.Add(worldItem);
+		}
+		GD.Print(itemsToPickUp.Count);
+	}
+
+	public void RemoveToPickUp(WorldItem worldItem)
+	{
+		itemsToPickUp.Remove(worldItem);
+		
+		if(itemsToPickUp.Count == 0)
+			itemsToPickUp = null;
+	}
+	
+	#endregion
 }

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsx67vggol7h"]
+
+[ext_resource type="Script" path="res://Scripts/InventorySystem/WorldItem.cs" id="1_exld2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8b1rn"]
+size = Vector3(3.91261, 1.48662, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_854u3"]
+albedo_color = Color(1, 0.415686, 0.145098, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_hb3rk"]
+material = SubResource("StandardMaterial3D_854u3")
+text = "TOMEK"
+font_size = 20
+pixel_size = 0.05
+depth = 0.1
+
+[node name="TestItem" type="Area3D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_exld2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8b1rn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -0.000450337, -0.000188599, 0.000188609, 2.10619e-05, 1, -0.000450333, -1, 2.11466e-05, 0, 0, 0)
+mesh = SubResource("TextMesh_hb3rk")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEnter"]
+[connection signal="body_exited" from="." to="." method="OnBodyExit"]

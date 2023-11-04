@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b3ra6chicawpd"]
+[gd_scene load_steps=24 format=3 uid="uid://b3ra6chicawpd"]
 
 [ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="1_xa4d3"]
 [ext_resource type="Script" path="res://Scripts/UI/UIManager.cs" id="2_jvsvf"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://1xisjm4tl4en" path="res://Assets/Environment/WorldGen/groundtxt.png" id="8_rfyow"]
 [ext_resource type="PackedScene" uid="uid://dlvjkuewyofm5" path="res://Prefabs/Bomba.tscn" id="8_rgwk1"]
 [ext_resource type="PackedScene" uid="uid://c25wx5tcdsgv0" path="res://Assets/Environment/Stuff/Cardboard.glb" id="8_tgbxs"]
+[ext_resource type="PackedScene" uid="uid://dsx67vggol7h" path="res://Prefabs/Items/World/test_item.tscn" id="13_lhep3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e5rq8"]
 font = ExtResource("2_xllyw")
@@ -100,11 +101,23 @@ vertical_alignment = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 52.0
-offset_bottom = 78.0
+offset_top = 46.0
+offset_bottom = 72.0
 grow_horizontal = 2
 text = "Shift - Sprint"
 label_settings = SubResource("LabelSettings_qp2u8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="UI/Gameplay/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 69.0
+offset_bottom = 95.0
+grow_horizontal = 2
+text = "E - Pick Up"
+label_settings = SubResource("LabelSettings_e5rq8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -185,7 +198,7 @@ collision_mask = 2
 shape = SubResource("WorldBoundaryShape3D_nl7aa")
 
 [node name="KLoc2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.68341, 3.94439, 5.65046)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.54071, 3.94439, 1.17747)
 collision_layer = 4
 collision_mask = 15
 mass = 1000.0
@@ -216,5 +229,14 @@ shape = SubResource("BoxShape3D_20kpl")
 
 [node name="Cardboard" parent="KLoc3/CollisionShape3D" instance=ExtResource("8_tgbxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="TestItem" parent="." instance=ExtResource("13_lhep3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.443065, 0.602745, 11.8753)
+
+[node name="TestItem2" parent="." instance=ExtResource("13_lhep3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.443065, 0.602745, 13.0676)
+
+[node name="TestItem3" parent="." instance=ExtResource("13_lhep3")]
+transform = Transform3D(0.83663, 0, 0.547768, 0, 1, 0, -0.547768, 0, 0.83663, -2.31488, 0.602745, 11.8753)
 
 [connection signal="pressed" from="UI/Gameplay/InvButton" to="UI" method="OpenInventory"]

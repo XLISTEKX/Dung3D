@@ -17,7 +17,7 @@ public partial class InventoryUI : CanvasLayer
 	
 	public void InitInventory(PlayerControler playerControler)
 	{
-		inventory = playerControler.playerInventory;
+		inventory = playerControler.GetInventory();
 		
 		for(int i = 0; i < inventory.items.Length; i++)
 		{
