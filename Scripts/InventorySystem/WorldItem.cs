@@ -1,25 +1,19 @@
 using Godot;
-using System;
 using XGeneric.Inventory;
+using XGeneric.System;
 
-public partial class WorldItem : Area3D
+public partial class WorldItem : Area3D, IInteract
 {
-	[Export] int itemID;
-	public InvItem item;
+	[Export] InvItem item;
 
-
-	public override void _Ready()
-	{
-		item = InventorySystem.GetItemByID(itemID);
-	}
 
 	public void OnBodyEnter(Node3D node)
 	{
 		foreach(Node child in node.GetChildren())
 		{
-			if(child is IInventory inventory)
+			if(child is IInteractMain interact)
 			{
-				inventory.AddToPickUp(this);
+				interact.AddInteract(this);
 				break;
 			}
 		}
@@ -29,11 +23,21 @@ public partial class WorldItem : Area3D
 	{
 		foreach(Node child in node.GetChildren())
 		{
-			if(child is IInventory inventory)
+			if(child is IInteractMain interact)
 			{
-				inventory.RemoveToPickUp(this);
+				interact.RemoveInteract(this);
 				break;
 			}
 		}
 	}
+
+	public void Interact(Node3D interactObject)
+	{
+		if(interactObject is IInventory inventory)
+		{
+			inventory.GetInventory().AddItem(item);
+			QueueFree();
+		}
+	}
+
 }

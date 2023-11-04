@@ -2,15 +2,16 @@ using System.Collections.Generic;
 using Godot;
 using XGeneric.Inventory;
 using XGeneric.Statistic;
+using XGeneric.System;
 
-public partial class PlayerControler : Node3D, HealthSystem, IInventory
+public partial class PlayerControler : Node3D, HealthSystem, IInventory, IInteractMain
 {
 	[Export] public float staminaMax = 10;
 	UIGameplay uIGameplay;
 	Inventory playerInventory;
 	public StatsSystem stats;
 
-	List<WorldItem> itemsToPickUp;
+	List<IInteract> interactItems;
 	
 	#region HealthSystem
 	[Export] public int maxHealth = 1;
@@ -29,7 +30,6 @@ public partial class PlayerControler : Node3D, HealthSystem, IInventory
 
 	public float stamina = 10;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		uIGameplay = GetNode<UIGameplay>("/root/TestSite/UI/Gameplay");
@@ -47,12 +47,10 @@ public partial class PlayerControler : Node3D, HealthSystem, IInventory
 	{
 		if(@event is InputEventKey key && key.KeyLabel == Key.E && key.Pressed)
 		{
-			if(itemsToPickUp == null)
+			if(interactItems == null)
 				return;
 			
-			playerInventory.AddItem(itemsToPickUp[0].item);
-			Node3D item = itemsToPickUp[0];
-			item.QueueFree();
+			interactItems[0].Interact(this);
 		}
 	}
 	public void UpdateUI()
@@ -105,30 +103,30 @@ public partial class PlayerControler : Node3D, HealthSystem, IInventory
 	{
 		return playerInventory;
 	}
-
-	public void AddToPickUp(WorldItem worldItem)
+	#endregion
+	
+	#region Interact Interface
+	public void AddInteract(IInteract interactObject)
 	{
-		if(itemsToPickUp == null)
+		if(interactItems == null)
 		{
-			itemsToPickUp = new()
+			interactItems = new()
 			{
-				worldItem
+				interactObject
 			};
 		}
 		else
 		{
-			itemsToPickUp.Add(worldItem);
+			interactItems.Add(interactObject);
 		}
-		GD.Print(itemsToPickUp.Count);
 	}
 
-	public void RemoveToPickUp(WorldItem worldItem)
+	public void RemoveInteract(IInteract interactObject)
 	{
-		itemsToPickUp.Remove(worldItem);
+		interactItems.Remove(interactObject);
 		
-		if(itemsToPickUp.Count == 0)
-			itemsToPickUp = null;
+		if(interactItems.Count == 0)
+			interactItems = null;
 	}
-	
 	#endregion
 }

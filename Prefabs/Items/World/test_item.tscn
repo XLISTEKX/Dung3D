@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsx67vggol7h"]
+[gd_scene load_steps=6 format=3 uid="uid://dsx67vggol7h"]
 
 [ext_resource type="Script" path="res://Scripts/InventorySystem/WorldItem.cs" id="1_exld2"]
+[ext_resource type="Resource" uid="uid://dhq262nr512fd" path="res://Prefabs/Items/Item(0).tres" id="2_lj3vi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8b1rn"]
 size = Vector3(3.91261, 1.48662, 1)
@@ -19,6 +20,7 @@ depth = 0.1
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_exld2")
+item = ExtResource("2_lj3vi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_8b1rn")
