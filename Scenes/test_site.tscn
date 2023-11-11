@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b3ra6chicawpd"]
+[gd_scene load_steps=26 format=3 uid="uid://b3ra6chicawpd"]
 
 [ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="1_xa4d3"]
 [ext_resource type="Script" path="res://Scripts/UI/UIManager.cs" id="2_jvsvf"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cxxehy12xcth6" path="res://Prefabs/UI/inventory_ui.tscn" id="2_qqiac"]
 [ext_resource type="PackedScene" uid="uid://bf13ay8l1ihku" path="res://Prefabs/UI/FPS_Counter.tscn" id="2_tyqye"]
 [ext_resource type="FontFile" uid="uid://dlq3xxtfr5wu0" path="res://Fonts/PixelSans/PixelifySans-SemiBold.ttf" id="2_xllyw"]
+[ext_resource type="PackedScene" uid="uid://bgbqpvoh7h6p5" path="res://Prefabs/UI/chest_inventory.tscn" id="3_ncegk"]
 [ext_resource type="PackedScene" uid="uid://cjrv3muq7rk8n" path="res://Prefabs/UI/sprint_bar.tscn" id="4_1nmw7"]
 [ext_resource type="Texture2D" uid="uid://byagd4rr443sr" path="res://Sprites/Sprite_Backpack.png" id="6_fvpr8"]
 [ext_resource type="PackedScene" uid="uid://ds1dbnfxbj8xh" path="res://Prefabs/Enemy/stephen.tscn" id="6_vanjg"]
@@ -59,6 +60,7 @@ size = Vector2(100, 100)
 process_mode = 3
 script = ExtResource("2_jvsvf")
 UIInventory = ExtResource("2_qqiac")
+UIcustInv = ExtResource("3_ncegk")
 
 [node name="Gameplay" type="CanvasLayer" parent="UI" node_paths=PackedStringArray("staminaBar", "healthBar")]
 process_mode = 1
@@ -243,4 +245,4 @@ transform = Transform3D(0.83663, 0, 0.547768, 0, 1, 0, -0.547768, 0, 0.83663, -2
 [node name="Chest" parent="." instance=ExtResource("14_miwkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.492702, 6)
 
-[connection signal="pressed" from="UI/Gameplay/InvButton" to="UI" method="OpenInventory"]
+[connection signal="pressed" from="UI/Gameplay/InvButton" to="UI" method="OpenPlayerInventory"]
