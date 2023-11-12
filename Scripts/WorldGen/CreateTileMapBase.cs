@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 
 public partial class CreateTileMapBase : TileMap
 {
@@ -13,26 +14,31 @@ public partial class CreateTileMapBase : TileMap
 	[Export] TileMap tileMap;
 	Vector2I baseAtlas = new(24,12);	//Coordinates of a brown tile in the tileset
 
-	Godot.Collections.Array<Vector2I> mapArray;
+	public static Godot.Collections.Array<Vector2I> mapArray;
 	Godot.Collections.Array<Vector2I> mapArrayForests;
 	Godot.Collections.Array<Vector2I> mapArrayRocks;
+
+	[Signal] public delegate void NewSignalEventHandler();
 
 	public override void _Ready()
 	{
 		RandomNumberGenerator seed = new();
-		seed.Randomize();
+		//seed.Randomize();
 		ApplyNoiseSettings(seed.RandiRange(0, 2048));
 		mapArray = MapArray.CreateMapArrayCircular(noise, creationSize, creationThreshold, creationRadius);
 
-		seed.Randomize();
-		noise.Seed=seed.RandiRange(0, 2048);
-		mapArrayForests = MapArray.CreateArrayOnTop(mapArray, noise, creationThreshold+0.3f);
+		noise.Frequency = 0.07f;
 
-		seed.Randomize();
+		//seed.Randomize();
 		noise.Seed=seed.RandiRange(0, 2048);
 		mapArrayRocks = MapArray.CreateArrayOnTop(mapArray, noise, creationThreshold+0.3f);
 
+		//seed.Randomize();
+		noise.Seed=seed.RandiRange(0, 2048);
+		mapArrayForests = MapArray.CreateArrayOnTop(mapArray, noise, creationThreshold+0.3f);
+
 		CreateBase();
+		EmitSignal("NewSignalEventHandler");
 	}
 
 	private void ApplyNoiseSettings(int seed)
@@ -56,7 +62,7 @@ public partial class CreateTileMapBase : TileMap
 	private void CreateBase() 
 	{
 		tileMap.SetCellsTerrainConnect(0, mapArray, 0, 0, true);
-		tileMap.SetCellsTerrainConnect(0, mapArrayForests, 1, 0, true);
-		tileMap.SetCellsTerrainConnect(0, mapArrayRocks, 1, 1, true);
+		tileMap.SetCellsTerrainConnect(1, mapArrayRocks, 1, 1, true);
+		tileMap.SetCellsTerrainConnect(2, mapArrayForests, 1, 0, true);
 	}
 }
