@@ -1,3 +1,7 @@
+/*
+
+Oopsies
+
 using Godot;
 using System;
 using System.Collections;
@@ -25,3 +29,5 @@ public class TileClass
         return posZ;
     }
 }
+
+*/

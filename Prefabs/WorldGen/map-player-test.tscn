@@ -1,0 +1,177 @@
+[gd_scene load_steps=16 format=3 uid="uid://dbcuwke4v4vmd"]
+
+[ext_resource type="Script" path="res://Scripts/UI/UIManager.cs" id="1_1vkjo"]
+[ext_resource type="PackedScene" uid="uid://bikgsyhi48bf3" path="res://Prefabs/player.tscn" id="1_bap2g"]
+[ext_resource type="PackedScene" uid="uid://cxxehy12xcth6" path="res://Prefabs/UI/inventory_ui.tscn" id="2_r3irf"]
+[ext_resource type="PackedScene" uid="uid://bqrmxd2sc85vt" path="res://Prefabs/WorldGen/GridMapTest-2.tscn" id="2_vq4dr"]
+[ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="3_hbq57"]
+[ext_resource type="FontFile" uid="uid://dlq3xxtfr5wu0" path="res://Fonts/PixelSans/PixelifySans-SemiBold.ttf" id="4_8cuto"]
+[ext_resource type="PackedScene" uid="uid://cjrv3muq7rk8n" path="res://Prefabs/UI/sprint_bar.tscn" id="5_sy6jr"]
+[ext_resource type="Texture2D" uid="uid://byagd4rr443sr" path="res://Sprites/Sprite_Backpack.png" id="6_nhknw"]
+[ext_resource type="PackedScene" uid="uid://bf13ay8l1ihku" path="res://Prefabs/UI/FPS_Counter.tscn" id="7_yvpng"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_eynqe"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_puyfv"]
+sky_material = SubResource("ProceduralSkyMaterial_eynqe")
+
+[sub_resource type="Environment" id="Environment_5ira4"]
+background_mode = 2
+sky = SubResource("Sky_puyfv")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_jpgjb"]
+font = ExtResource("4_8cuto")
+font_color = Color(0, 0, 0, 0.694118)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4coqa"]
+font = ExtResource("4_8cuto")
+font_color = Color(0, 0, 0, 0.686275)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_na4qv"]
+bg_color = Color(1, 0, 0, 0.784314)
+
+[node name="TestSite" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5ira4")
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("1_1vkjo")
+UIInventory = ExtResource("2_r3irf")
+
+[node name="Gameplay" type="CanvasLayer" parent="UI" node_paths=PackedStringArray("staminaBar", "healthBar")]
+process_mode = 1
+script = ExtResource("3_hbq57")
+staminaBar = NodePath("SprintBar")
+healthBar = NodePath("HealthBar")
+
+[node name="Control" type="Control" parent="UI/Gameplay"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_right = 300.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/Gameplay/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Controls:"
+label_settings = SubResource("LabelSettings_jpgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Gameplay/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 23.0
+offset_bottom = 49.0
+grow_horizontal = 2
+text = "WASD - Movement"
+label_settings = SubResource("LabelSettings_jpgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Gameplay/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 46.0
+offset_bottom = 72.0
+grow_horizontal = 2
+text = "Shift - Sprint"
+label_settings = SubResource("LabelSettings_4coqa")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="UI/Gameplay/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 69.0
+offset_bottom = 95.0
+grow_horizontal = 2
+text = "E - Interact"
+label_settings = SubResource("LabelSettings_jpgjb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SprintBar" parent="UI/Gameplay" instance=ExtResource("5_sy6jr")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -73.0
+offset_right = 110.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HealthBar" parent="UI/Gameplay" instance=ExtResource("5_sy6jr")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -48.0
+offset_right = 110.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_na4qv")
+step = 1.0
+
+[node name="InvButton" type="TextureButton" parent="UI/Gameplay"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 16.0
+offset_right = -29.0
+offset_bottom = 84.0
+grow_horizontal = 0
+texture_normal = ExtResource("6_nhknw")
+texture_pressed = ExtResource("6_nhknw")
+texture_hover = ExtResource("6_nhknw")
+texture_disabled = ExtResource("6_nhknw")
+texture_focused = ExtResource("6_nhknw")
+stretch_mode = 5
+
+[node name="Panel" parent="UI" instance=ExtResource("7_yvpng")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="proto-gltf" parent="." instance=ExtResource("1_bap2g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+movementSpeed = 6.0
+runningSpeed = 6.0
+
+[node name="GridMapTest-2" parent="." instance=ExtResource("2_vq4dr")]
+
+[connection signal="pressed" from="UI/Gameplay/InvButton" to="UI" method="OpenPlayerInventory"]

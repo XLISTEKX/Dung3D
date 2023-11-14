@@ -1,21 +1,21 @@
 [gd_scene load_steps=16 format=3 uid="uid://dt50i16h0ec34"]
 
-[ext_resource type="PackedScene" uid="uid://bkow4yldfixk1" path="res://Prefabs/WorldGen/GridMapScene.tscn" id="1_o1qe1"]
-[ext_resource type="PackedScene" uid="uid://bikgsyhi48bf3" path="res://Prefabs/player.tscn" id="2_e2env"]
-[ext_resource type="Script" path="res://Scripts/UI/UIManager.cs" id="3_fcccd"]
-[ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="3_nkm7k"]
-[ext_resource type="FontFile" uid="uid://dlq3xxtfr5wu0" path="res://Fonts/PixelSans/PixelifySans-SemiBold.ttf" id="4_2vei4"]
-[ext_resource type="PackedScene" uid="uid://cxxehy12xcth6" path="res://Prefabs/UI/inventory_ui.tscn" id="4_ygg27"]
-[ext_resource type="PackedScene" uid="uid://cjrv3muq7rk8n" path="res://Prefabs/UI/sprint_bar.tscn" id="5_en2yi"]
-[ext_resource type="Texture2D" uid="uid://byagd4rr443sr" path="res://Sprites/Sprite_Backpack.png" id="6_fttyo"]
-[ext_resource type="PackedScene" uid="uid://bf13ay8l1ihku" path="res://Prefabs/UI/FPS_Counter.tscn" id="7_qw880"]
+[ext_resource type="Script" path="res://Scripts/UI/UIManager.cs" id="1_d21m7"]
+[ext_resource type="PackedScene" uid="uid://cxxehy12xcth6" path="res://Prefabs/UI/inventory_ui.tscn" id="2_l5dhg"]
+[ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="3_mcw13"]
+[ext_resource type="FontFile" uid="uid://dlq3xxtfr5wu0" path="res://Fonts/PixelSans/PixelifySans-SemiBold.ttf" id="4_trdfr"]
+[ext_resource type="PackedScene" uid="uid://cjrv3muq7rk8n" path="res://Prefabs/UI/sprint_bar.tscn" id="5_7uyly"]
+[ext_resource type="Texture2D" uid="uid://byagd4rr443sr" path="res://Sprites/Sprite_Backpack.png" id="6_4eisw"]
+[ext_resource type="PackedScene" uid="uid://bf13ay8l1ihku" path="res://Prefabs/UI/FPS_Counter.tscn" id="7_nlt7b"]
+[ext_resource type="PackedScene" uid="uid://bkow4yldfixk1" path="res://Prefabs/WorldGen/deprecated/GridMapScene.tscn" id="8_obbbe"]
+[ext_resource type="PackedScene" uid="uid://bikgsyhi48bf3" path="res://Prefabs/player.tscn" id="9_8gcjq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_b7x13"]
-font = ExtResource("4_2vei4")
+font = ExtResource("4_trdfr")
 font_color = Color(0, 0, 0, 0.694118)
 
 [sub_resource type="LabelSettings" id="LabelSettings_v87qs"]
-font = ExtResource("4_2vei4")
+font = ExtResource("4_trdfr")
 font_color = Color(0, 0, 0, 0.686275)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5pewy"]
@@ -25,12 +25,12 @@ bg_color = Color(1, 0, 0, 0.784314)
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_rd32j"]
+[sub_resource type="Sky" id="Sky_e48l2"]
 sky_material = SubResource("ProceduralSkyMaterial_yiy5y")
 
 [sub_resource type="Environment" id="Environment_ujbtq"]
 background_mode = 2
-sky = SubResource("Sky_rd32j")
+sky = SubResource("Sky_e48l2")
 tonemap_mode = 2
 glow_enabled = true
 
@@ -38,12 +38,12 @@ glow_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 process_mode = 3
-script = ExtResource("3_fcccd")
-UIInventory = ExtResource("4_ygg27")
+script = ExtResource("1_d21m7")
+UIInventory = ExtResource("2_l5dhg")
 
 [node name="Gameplay" type="CanvasLayer" parent="UI" node_paths=PackedStringArray("staminaBar", "healthBar")]
 process_mode = 1
-script = ExtResource("3_nkm7k")
+script = ExtResource("3_mcw13")
 staminaBar = NodePath("SprintBar")
 healthBar = NodePath("HealthBar")
 
@@ -103,7 +103,7 @@ label_settings = SubResource("LabelSettings_b7x13")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SprintBar" parent="UI/Gameplay" instance=ExtResource("5_en2yi")]
+[node name="SprintBar" parent="UI/Gameplay" instance=ExtResource("5_7uyly")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -116,7 +116,7 @@ offset_bottom = -53.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="HealthBar" parent="UI/Gameplay" instance=ExtResource("5_en2yi")]
+[node name="HealthBar" parent="UI/Gameplay" instance=ExtResource("5_7uyly")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -140,14 +140,14 @@ offset_top = 16.0
 offset_right = -29.0
 offset_bottom = 84.0
 grow_horizontal = 0
-texture_normal = ExtResource("6_fttyo")
-texture_pressed = ExtResource("6_fttyo")
-texture_hover = ExtResource("6_fttyo")
-texture_disabled = ExtResource("6_fttyo")
-texture_focused = ExtResource("6_fttyo")
+texture_normal = ExtResource("6_4eisw")
+texture_pressed = ExtResource("6_4eisw")
+texture_hover = ExtResource("6_4eisw")
+texture_disabled = ExtResource("6_4eisw")
+texture_focused = ExtResource("6_4eisw")
 stretch_mode = 5
 
-[node name="Panel" parent="UI" instance=ExtResource("7_qw880")]
+[node name="Panel" parent="UI" instance=ExtResource("7_nlt7b")]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -167,10 +167,10 @@ environment = SubResource("Environment_ujbtq")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Node3D" parent="." instance=ExtResource("1_o1qe1")]
+[node name="Node3D" parent="." instance=ExtResource("8_obbbe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -160, 0, -160)
 
-[node name="proto-gltf" parent="." instance=ExtResource("2_e2env")]
+[node name="proto-gltf" parent="." instance=ExtResource("9_8gcjq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 movementSpeed = 6.0
 

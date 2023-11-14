@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cdwvi6s7lbp8v"
-path="res://.godot/imported/struct.glb-3e13eed5bd32b0778df8922d8805c678.scn"
+path="res://.godot/imported/struct.glb-8ed59028c02bd72d3e52b195039ffb6a.scn"
 
 [deps]
 
-source_file="res://Assets/Environment/WorldGen/struct.glb"
-dest_files=["res://.godot/imported/struct.glb-3e13eed5bd32b0778df8922d8805c678.scn"]
+source_file="res://Assets/Environment/WorldGen/deprecated/struct.glb"
+dest_files=["res://.godot/imported/struct.glb-8ed59028c02bd72d3e52b195039ffb6a.scn"]
 
 [params]
 
