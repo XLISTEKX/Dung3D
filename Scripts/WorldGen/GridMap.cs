@@ -28,17 +28,17 @@ public partial class GridMap : Godot.GridMap
 	{
 		foreach(Vector2I item in baseMapArray)
 		{
-			this.SetCellItem(new Vector3I(item.X,0,item.Y), 1);
+			this.SetCellItem(new Vector3I(item.X,0,item.Y), 0);
 		}
 
 		foreach(Vector2I item in rocksMapArray)
 		{
-			this.SetCellItem(new Vector3I(item.X,0,item.Y), 3);
+			this.SetCellItem(new Vector3I(item.X,0,item.Y), 2);
 		}
 
 		foreach(Vector2I item in forestsMapArray)
 		{
-			this.SetCellItem(new Vector3I(item.X,0,item.Y), 2);
+			this.SetCellItem(new Vector3I(item.X,0,item.Y), 1);
 		}
 
 		foreach(Vector2I item in addonsMapArray)
