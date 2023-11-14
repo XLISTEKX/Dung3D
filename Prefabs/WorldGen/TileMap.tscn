@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtwvmendpv3y4"]
+[gd_scene load_steps=3 format=3 uid="uid://b37mnir15uoaq"]
 
 [ext_resource type="TileSet" uid="uid://cgms7ker80ju2" path="res://Assets/Environment/WorldGen/Ground_Tileset.tres" id="1_8ytho"]
 [ext_resource type="Script" path="res://Scripts/WorldGen/CreateTileMapBase.cs" id="2_cubbw"]

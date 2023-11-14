@@ -20,7 +20,6 @@ public partial class CreateTileMapBase : TileMap
 
 	Godot.Collections.Array<Vector2I> mapArrayAddons;
 
-	[Signal] public delegate void NewSignalEventHandler();
 
 	public override void _Ready()
 	{
@@ -46,7 +45,6 @@ public partial class CreateTileMapBase : TileMap
 		mapArrayAddons = MapArray.CreateArrayOnTop(mapArray, noise, creationThreshold+0.62f);
 
 		CreateBase();
-		EmitSignal("NewSignalEventHandler");
 	}
 
 	private void ApplyNoiseSettings(int seed)

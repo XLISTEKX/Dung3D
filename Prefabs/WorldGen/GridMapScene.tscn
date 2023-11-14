@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://bkow4yldfixk1"]
 
-[ext_resource type="Script" path="res://Prefabs/WorldGen/GridMap.cs" id="1_b4eqx"]
+[ext_resource type="Script" path="res://Scripts/WorldGen/GridMap.cs" id="1_ec7y6"]
 [ext_resource type="Script" path="res://Scripts/WorldGen/CreateTileMapBase.cs" id="1_v1wif"]
 [ext_resource type="TileSet" uid="uid://cgms7ker80ju2" path="res://Assets/Environment/WorldGen/Ground_Tileset.tres" id="1_xlgmc"]
 
@@ -205,7 +205,7 @@ metadata/_editor_source_scene = "res://Assets/Environment/WorldGen/tiletest.tscn
 mesh_library = SubResource("MeshLibrary_oe71r")
 cell_size = Vector3(10, 2, 10)
 cell_scale = 0.5
-script = ExtResource("1_b4eqx")
+script = ExtResource("1_ec7y6")
 tileMap = NodePath("TileMap")
 
 [node name="TileMap" type="TileMap" parent="GridMap" node_paths=PackedStringArray("tileMap")]
