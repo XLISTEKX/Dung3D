@@ -12,11 +12,13 @@ public partial class CreateTileMapBase : TileMap
 	
 	
 	[Export] TileMap tileMap;
-	Vector2I baseAtlas = new(24,12);	//Coordinates of a brown tile in the tileset
+	//Vector2I baseAtlas = new(24,12);	//Coordinates of a brown tile in the tileset
 
 	public static Godot.Collections.Array<Vector2I> mapArray;
 	Godot.Collections.Array<Vector2I> mapArrayForests;
 	Godot.Collections.Array<Vector2I> mapArrayRocks;
+
+	Godot.Collections.Array<Vector2I> mapArrayAddons;
 
 	[Signal] public delegate void NewSignalEventHandler();
 
@@ -36,6 +38,12 @@ public partial class CreateTileMapBase : TileMap
 		//seed.Randomize();
 		noise.Seed=seed.RandiRange(0, 2048);
 		mapArrayForests = MapArray.CreateArrayOnTop(mapArray, noise, creationThreshold+0.3f);
+
+		noise.Frequency = 0.45f;
+
+		//seed.Randomize();
+		noise.Seed=seed.RandiRange(0, 2048);
+		mapArrayAddons = MapArray.CreateArrayOnTop(mapArray, noise, creationThreshold+0.62f);
 
 		CreateBase();
 		EmitSignal("NewSignalEventHandler");
@@ -64,5 +72,6 @@ public partial class CreateTileMapBase : TileMap
 		tileMap.SetCellsTerrainConnect(0, mapArray, 0, 0, true);
 		tileMap.SetCellsTerrainConnect(1, mapArrayRocks, 1, 1, true);
 		tileMap.SetCellsTerrainConnect(2, mapArrayForests, 1, 0, true);
+		tileMap.SetCellsTerrainConnect(3, mapArrayAddons, 2, 0, true);
 	}
 }

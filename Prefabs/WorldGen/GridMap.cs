@@ -8,6 +8,7 @@ public partial class GridMap : Godot.GridMap
 	Godot.Collections.Array<Vector2I> baseMapArray;
 	Godot.Collections.Array<Vector2I> rocksMapArray;
 	Godot.Collections.Array<Vector2I> forestsMapArray;
+	Godot.Collections.Array<Vector2I> addonsMapArray;
 
 	public override void _Ready()
 	{
@@ -20,23 +21,29 @@ public partial class GridMap : Godot.GridMap
 	baseMapArray = tileMap.GetUsedCells(0);
 	rocksMapArray = tileMap.GetUsedCells(1);
 	forestsMapArray = tileMap.GetUsedCells(2);
+	addonsMapArray = tileMap.GetUsedCells(3);
 	}
 
 	private void createGridMap()
 	{
 		foreach(Vector2I item in baseMapArray)
 		{
-			this.SetCellItem(new Vector3I(item.X,0,item.Y), 0);
+			this.SetCellItem(new Vector3I(item.X,0,item.Y), 1);
 		}
 
 		foreach(Vector2I item in rocksMapArray)
 		{
-			this.SetCellItem(new Vector3I(item.X,0,item.Y), 2);
+			this.SetCellItem(new Vector3I(item.X,0,item.Y), 3);
 		}
 
 		foreach(Vector2I item in forestsMapArray)
 		{
-			this.SetCellItem(new Vector3I(item.X,0,item.Y), 1);
+			this.SetCellItem(new Vector3I(item.X,0,item.Y), 2);
+		}
+
+		foreach(Vector2I item in addonsMapArray)
+		{
+			this.SetCellItem(new Vector3I(item.X,1,item.Y), 3);
 		}
 	}
 
