@@ -35,7 +35,18 @@ public partial class WorldItem : Area3D, IInteract
 	{
 		if(interactObject is IInventory inventory)
 		{
-			inventory.GetInventory().AddItem(item);
+			int x = inventory.GetInventory().AddItem(item);
+			
+			UIManager manager = GetTree().GetFirstNodeInGroup("UIManager") as UIManager;
+			
+			if(manager.allLayers.Count > 1)
+			{
+				if(manager.allLayers[1] is InventoryUI inventoryUI)
+				{
+					inventoryUI.ReloadSlot(x);
+				}
+			}
+			
 			QueueFree();
 		}
 	}

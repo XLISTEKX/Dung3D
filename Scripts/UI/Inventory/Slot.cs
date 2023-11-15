@@ -20,7 +20,7 @@ public partial class Slot : Panel
 		slotID = id;
 		this.inventoryID = inventoryID;
 		if(item == null)
-		{
+		{			
 			Quantity.Visible = false;
 			Icon.Visible = false;
 			Quality.Modulate = new(0.5f,0.5f,0.5f);

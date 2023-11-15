@@ -5,7 +5,7 @@ public partial class InventoryUI : CustomInventoryUI
 {
 	[Export] Label cashLabel;
 	
-	[Export] Panel[] playerEQslots;
+	[Export] Slot playerEQSlot1, playerEQSlot2, playerEQSlot3;
 	
 	public override void InitInventory(Inventory inventory, Node3D initNode = null)
 	{
@@ -21,7 +21,9 @@ public partial class InventoryUI : CustomInventoryUI
 		}
 		cashLabel.Text = inventory.cash.ToString();
 		
-		
+		playerEQSlot1.InitSlot(inventory.eq.EQSlots[0], this, -1);
+		playerEQSlot2.InitSlot(inventory.eq.EQSlots[1], this, -2);
+		playerEQSlot3.InitSlot(inventory.eq.EQSlots[2], this, -3);
 	}
 	public override void _Input(InputEvent @event)
 	{
@@ -35,6 +37,14 @@ public partial class InventoryUI : CustomInventoryUI
 			{
 				dragObject.Position = move.Position - dragObject.PivotOffset;
 			}
+		}
+	}
+	
+	public void ReloadSlots()
+	{
+		for(int i = 0; i < slotTransform.GetChildCount(); i++)
+		{
+			slotTransform.GetChild<Slot>(i).UpdateSlot(inventory.items[i]);
 		}
 	}
 	
@@ -77,7 +87,7 @@ public partial class InventoryUI : CustomInventoryUI
 	}
 	
 	public override void EndDrag()
-	{
+	{	
 		if(initSlot == null)
 		 	return;
 		
@@ -86,17 +96,48 @@ public partial class InventoryUI : CustomInventoryUI
 		dragObject.QueueFree();
 		dragObject = null;
 		initSlot.Icon.Modulate += new Color(0,0,0, 0.5f);
+		
+		
 		if(hoveredSlot != null)
 		{
-			if(initSlot.slotID < 0)
+			var hoverID = (hoveredSlot.slotID * -1) - 1;
+			var initID = (initSlot.slotID * -1) - 1;
+			
+			InvItem initItem = new(), hoveredItem = new();
+			
+			switch(initSlot.slotID, hoveredSlot.slotID)
 			{
+				case (>= 0, >= 0):
 				
+					inventory.ReplaceItem(initSlot.slotID, hoveredSlot.slotID);
+					initItem = inventory.items[initSlot.slotID];
+					hoveredItem = inventory.items[hoveredSlot.slotID];
+					
+				break;
+				
+				case (< 0, >= 0):
+					inventory.UnEquipItem(initID, hoveredSlot.slotID);
+					initItem = inventory.eq.EQSlots[initID];
+					hoveredItem = inventory.items[hoveredSlot.slotID];
+				break;
+				
+				case (>= 0, < 0):
+					inventory.EquipItem(initSlot.slotID, hoverID);
+					initItem = inventory.items[initSlot.slotID];
+					hoveredItem = inventory.eq.EQSlots[hoverID];
+				break;
+				
+				case (< 0, < 0):
+				
+					(inventory.eq.EQSlots[initID], inventory.eq.EQSlots[hoverID]) = (inventory.eq.EQSlots[hoverID], inventory.eq.EQSlots[initID]);
+					initItem = inventory.eq.EQSlots[initID];
+					hoveredItem = inventory.eq.EQSlots[hoverID];
+				break;
 			}
 			
-			inventory.ReplaceItem(initSlot.slotID, hoveredSlot.slotID);
-			
-			initSlot.UpdateSlot(inventory.items[initSlot.slotID]);
-			hoveredSlot.UpdateSlot(inventory.items[hoveredSlot.slotID]);
+			initSlot.UpdateSlot(initItem);
+			hoveredSlot.UpdateSlot(hoveredItem);
+
 			hoveredSlot = null;
 		}
 		

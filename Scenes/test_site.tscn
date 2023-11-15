@@ -56,7 +56,7 @@ size = Vector2(100, 100)
 
 [node name="TestSite" type="Node3D"]
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." groups=["UIManager"]]
 process_mode = 3
 script = ExtResource("2_jvsvf")
 UIInventory = ExtResource("2_qqiac")

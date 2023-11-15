@@ -38,6 +38,19 @@ public partial class CustomInventoryUI : CanvasLayer
 		
 	}
 	
+	public virtual void ReloadSlot(int slotID)
+	{
+		slotTransform.GetChild<Slot>(slotID).UpdateSlot(inventory.items[slotID]);
+	}
+	
+	public void ReloadSlots()
+	{
+		for(int i = 0; i < slotTransform.GetChildCount(); i++)
+		{
+			slotTransform.GetChild<Slot>(i).UpdateSlot(inventory.items[i]);
+		}
+	}
+	
 	public void CloseInventory()
 	{
 		UIManager manager = GetNode<UIManager>("..");
