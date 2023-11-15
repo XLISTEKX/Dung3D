@@ -5,6 +5,7 @@ namespace XGeneric.Inventory
 	public class Inventory
 	{
 		public InvItem[] items;
+		public EQ eq;
 		public int size;
 		
 		public uint cash = 1000;
@@ -41,7 +42,7 @@ namespace XGeneric.Inventory
 		//Exchange Item from this inventory with other inventory
 		public void ExchangeItem(int firstItemID, int secIDsecInventory, Inventory inventory)
 		{
-            (inventory.items[secIDsecInventory], items[firstItemID]) = (items[firstItemID], inventory.items[secIDsecInventory]);
-        }
-    }
+			(inventory.items[secIDsecInventory], items[firstItemID]) = (items[firstItemID], inventory.items[secIDsecInventory]);
+		}
+	}
 }

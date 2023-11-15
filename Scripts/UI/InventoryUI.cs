@@ -5,6 +5,8 @@ public partial class InventoryUI : CustomInventoryUI
 {
 	[Export] Label cashLabel;
 	
+	[Export] Panel[] playerEQslots;
+	
 	public override void InitInventory(Inventory inventory, Node3D initNode = null)
 	{
 		this.inventory = inventory;
@@ -18,6 +20,8 @@ public partial class InventoryUI : CustomInventoryUI
 
 		}
 		cashLabel.Text = inventory.cash.ToString();
+		
+		
 	}
 	public override void _Input(InputEvent @event)
 	{
@@ -84,6 +88,11 @@ public partial class InventoryUI : CustomInventoryUI
 		initSlot.Icon.Modulate += new Color(0,0,0, 0.5f);
 		if(hoveredSlot != null)
 		{
+			if(initSlot.slotID < 0)
+			{
+				
+			}
+			
 			inventory.ReplaceItem(initSlot.slotID, hoveredSlot.slotID);
 			
 			initSlot.UpdateSlot(inventory.items[initSlot.slotID]);

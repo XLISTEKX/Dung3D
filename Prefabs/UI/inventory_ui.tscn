@@ -50,17 +50,18 @@ bg_color = Color(1, 1, 1, 0.196078)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbxj4"]
 bg_color = Color(0, 1, 0, 1)
 
-[node name="InventoryUI" type="CanvasLayer" node_paths=PackedStringArray("slotTransform", "cashLabel")]
+[node name="InventoryUI" type="CanvasLayer" node_paths=PackedStringArray("cashLabel", "playerEQslots", "slotTransform")]
 script = ExtResource("1_a6k78")
+cashLabel = NodePath("TopPanel/HBoxContainer/HBoxContainer/Label")
+playerEQslots = [NodePath("ColorRect/Slot"), NodePath("ColorRect/Slot2"), NodePath("ColorRect/Slot3")]
 slot = ExtResource("2_ntwwv")
 slotTransform = NodePath("InventoryContent/TabContainer/S/ScrollContainer/GridContainer")
-cashLabel = NodePath("TopPanel/HBoxContainer/HBoxContainer/Label")
 
 [node name="InventoryContent" type="Control" parent="."]
 layout_mode = 3
-anchor_left = 0.02
+anchor_left = 0.05
 anchor_top = 0.15
-anchor_right = 0.32
+anchor_right = 0.35
 anchor_bottom = 0.9
 
 [node name="TabContainer" type="TabContainer" parent="InventoryContent"]
@@ -214,3 +215,55 @@ show_percentage = false
 [node name="Control2" type="Control" parent="TopPanel/HBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_left = 0.65
+anchor_top = 0.15
+anchor_right = 0.95
+anchor_bottom = 0.9
+color = Color(1, 1, 1, 0)
+
+[node name="Slot" parent="ColorRect" instance=ExtResource("2_ntwwv")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 0.0
+grow_vertical = 0
+
+[node name="Slot2" parent="ColorRect" node_paths=PackedStringArray("Quantity", "Icon", "Quality") instance=ExtResource("2_ntwwv")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.5
+offset_top = -75.0
+offset_right = 37.5
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+Quantity = NodePath("../Slot/Quantity")
+Icon = NodePath("../Slot/Icon")
+Quality = NodePath("../Slot/Quality")
+
+[node name="Slot3" parent="ColorRect" node_paths=PackedStringArray("Quantity", "Icon", "Quality") instance=ExtResource("2_ntwwv")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+Quantity = NodePath("../Slot/Quantity")
+Icon = NodePath("../Slot/Icon")
+Quality = NodePath("../Slot/Quality")
