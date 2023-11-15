@@ -1,11 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgbqpvoh7h6p5"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Inventory/CustomInventoryUI.cs" id="1_ef4hs"]
-[ext_resource type="PackedScene" uid="uid://bdob34khy1ag0" path="res://Prefabs/UI/slot.tscn" id="2_wjo5s"]
+[ext_resource type="Script" path="res://Scripts/UI/Inventory/ChestInventoryUI.cs" id="1_2daxl"]
+[ext_resource type="PackedScene" uid="uid://bdob34khy1ag0" path="res://Prefabs/UI/slot.tscn" id="2_csbps"]
 
-[node name="ChestInventory" type="CanvasLayer" node_paths=PackedStringArray("slotTransform")]
-script = ExtResource("1_ef4hs")
-slot = ExtResource("2_wjo5s")
+[node name="ChestInventory" type="CanvasLayer" node_paths=PackedStringArray("playerInventoryTransform", "slotTransform")]
+script = ExtResource("1_2daxl")
+playerInventoryTransform = NodePath("PlayerInv/ScrollContainer/GridContainer")
+slot = ExtResource("2_csbps")
 slotTransform = NodePath("ChestInv/ScrollContainer/GridContainer")
 
 [node name="ChestInv" type="Panel" parent="."]
@@ -30,6 +31,36 @@ grow_vertical = 2
 horizontal_scroll_mode = 0
 
 [node name="GridContainer" type="GridContainer" parent="ChestInv/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+columns = 4
+
+[node name="PlayerInv" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.35
+anchor_bottom = 0.9
+offset_left = -0.488007
+offset_top = -0.320004
+offset_right = -0.487976
+offset_bottom = -6.79999
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PlayerInv"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 0.199982
+offset_top = 22.0
+offset_right = 0.199982
+offset_bottom = -0.400024
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="PlayerInv/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 columns = 4

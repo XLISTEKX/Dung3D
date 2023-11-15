@@ -1,20 +1,11 @@
 using Godot;
 using XGeneric.Inventory;
 
-public partial class InventoryUI : CanvasLayer
+public partial class InventoryUI : CustomInventoryUI
 {
-	[Export] protected PackedScene slot;
-	[Export] protected GridContainer slotTransform;
-	[Export] private Label cashLabel;
+	[Export] Label cashLabel;
 	
-	protected Inventory inventory;
-	
-	protected Slot hoveredSlot, initSlot;
-	protected TextureRect dragObject;
-	
-	protected bool isDraging = false;
-	
-	public virtual void InitInventory(Inventory inventory)
+	public override void InitInventory(Inventory inventory, Node3D initNode = null)
 	{
 		this.inventory = inventory;
 		
@@ -43,7 +34,7 @@ public partial class InventoryUI : CanvasLayer
 		}
 	}
 	
-	public virtual void BeginDrag(Slot initSlot)
+	public override void BeginDrag(Slot initSlot)
 	{
 		isDraging = true;
 		this.initSlot = initSlot;
@@ -62,7 +53,7 @@ public partial class InventoryUI : CanvasLayer
 
 		initSlot.Icon.Modulate -= new Color(0,0,0, 0.5f);
 	}
-	public virtual void UpdateHoveredDrag(Slot hovered, bool enter)
+	public override void UpdateHoveredDrag(Slot hovered, bool enter)
 	{
 		if(!isDraging)
 			return;
@@ -81,7 +72,7 @@ public partial class InventoryUI : CanvasLayer
 		
 	}
 	
-	public virtual void EndDrag()
+	public override void EndDrag()
 	{
 		if(initSlot == null)
 		 	return;
@@ -102,14 +93,5 @@ public partial class InventoryUI : CanvasLayer
 		
 		initSlot = null; 
 		
-	}
-
-	public virtual void CloseInventory()
-	{		
-		UIManager manager = GetNode<UIManager>("..");
-		
-		manager.ToggleUILayer(0);
-		manager.allLayers.Remove(this);
-		QueueFree();
 	}
 }

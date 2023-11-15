@@ -8,15 +8,17 @@ public partial class Slot : Panel
 	
 	[Export] public TextureRect Icon, Quality;
 	
-	InventoryUI inventoryUI;
-	public int slotID;
+	CustomInventoryUI inventoryUI;
+	public int slotID, inventoryID;
+	
 	
 	bool isDraged = false;
 	
-	public void InitSlot(InvItem item, InventoryUI inventoryUI, int id)
+	public void InitSlot(InvItem item, CustomInventoryUI inventoryUI, int id, int inventoryID = 0)
 	{
 		this.inventoryUI = inventoryUI;
 		slotID = id;
+		this.inventoryID = inventoryID;
 		if(item == null)
 		{
 			Quantity.Visible = false;

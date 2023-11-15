@@ -46,6 +46,6 @@ public partial class Chest : Area3D, IInventory, IInteract
 
 	public void Interact(Node3D interactObject)
 	{
-		GetNode<UIManager>("/root/TestSite/UI").OpenCustomInventory(inventory);
+		GetNode<UIManager>("/root/TestSite/UI").OpenCustomInventory(inventory, this);
 	}
 }

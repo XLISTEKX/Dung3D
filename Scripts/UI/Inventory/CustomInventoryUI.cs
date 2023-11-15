@@ -1,19 +1,21 @@
 using Godot;
 using XGeneric.Inventory;
 
-public partial class CustomInventoryUI : InventoryUI
+public partial class CustomInventoryUI : CanvasLayer
 {
-	public override void InitInventory(Inventory inventory)
+	[Export] protected PackedScene slot;
+	[Export] protected GridContainer slotTransform;
+	
+	protected Inventory inventory;
+	
+	protected Slot hoveredSlot, initSlot;
+	protected TextureRect dragObject;
+	
+	protected bool isDraging = false;
+	
+	public virtual void InitInventory(Inventory inventory, Node3D initNode = null)
 	{
-		this.inventory = inventory;
 		
-		for(int i = 0; i < inventory.items.Length; i++)
-		{
-			Slot temp = slot.Instantiate<Slot>();
-			slotTransform.AddChild(temp);
-			temp.Name = "Slot" + i;
-			temp.InitSlot(inventory.items[i], this, i);
-		}
 	}
 	public override void _Input(InputEvent @event)
 	{
@@ -22,7 +24,27 @@ public partial class CustomInventoryUI : InventoryUI
 			CloseInventory();
 		}
 	}
-	
 
+	public virtual void BeginDrag(Slot initSlot)
+	{
+		
+	}
+	public virtual void UpdateHoveredDrag(Slot hovered, bool enter)
+	{
+		
+	}
+	public virtual void EndDrag()
+	{
+		
+	}
+	
+	public void CloseInventory()
+	{
+		UIManager manager = GetNode<UIManager>("..");
+		
+		manager.ToggleUILayer(0);
+		manager.allLayers.Remove(this);
+		QueueFree();
+	}
 
 }

@@ -35,10 +35,13 @@ namespace XGeneric.Inventory
 		
 		public void ReplaceItem(int firstID, int secID)
 		{
-			InvItem tempItem = items[firstID];
-			
-			items[firstID] = items[secID];
-			items[secID] = tempItem;
+			(items[secID], items[firstID]) = (items[firstID], items[secID]);
 		}
-	}
+
+		//Exchange Item from this inventory with other inventory
+		public void ExchangeItem(int firstItemID, int secIDsecInventory, Inventory inventory)
+		{
+            (inventory.items[secIDsecInventory], items[firstItemID]) = (items[firstItemID], inventory.items[secIDsecInventory]);
+        }
+    }
 }

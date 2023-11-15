@@ -35,14 +35,14 @@ public partial class UIManager : CanvasLayer
 		inventory.InitInventory(playerControler.GetInventory());
 	}
 	
-	public void OpenCustomInventory(Inventory inventory)
+	public void OpenCustomInventory(Inventory inventory, Node3D initNode = null)
 	{
 		CustomInventoryUI UIinventory = UIcustInv.Instantiate<CustomInventoryUI>();
 		AddChild(UIinventory);
 		allLayers[0].Visible = false;
 		allLayers.Add(UIinventory);
 		
-		UIinventory.InitInventory(inventory);
+		UIinventory.InitInventory(inventory, initNode);
 	}
 	
 	
