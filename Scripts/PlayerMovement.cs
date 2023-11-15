@@ -116,6 +116,10 @@ public partial class PlayerMovement : CharacterBody3D
 		var querry = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
 		
 		var rayArray = SpaceState.IntersectRay(querry);
+		
+		if(rayArray.Count <= 0)
+			return Vector3.Zero;
+		
 		return (Vector3) rayArray["position"];
 	}
 	//???
