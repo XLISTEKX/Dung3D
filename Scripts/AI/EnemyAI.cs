@@ -51,10 +51,10 @@ public partial class EnemyAI : CharacterBody3D, HealthSystem
 			tree.Set("parameters/conditions/isWalking", true);
 		}
 		
-		MoveAndCollide(moveDirection * (float)delta);
+		//MoveAndCollide(moveDirection * (float)delta);
 		
-		//Velocity = moveDirection;
-		//MoveAndSlide();
+		Velocity = moveDirection;
+		MoveAndSlide();
 		RotateBody((float) delta);
 	}
 
