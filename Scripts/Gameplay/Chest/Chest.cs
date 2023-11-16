@@ -12,6 +12,7 @@ public partial class Chest : Area3D, IInventory, IInteract
 		inventory = new(10);
 		
 		inventory.AddItem(InventorySystem.GetItemByID(0));
+		inventory.AddItem(InventorySystem.GetItemByID(2));
 	}
 
 	public void OnBodyEnter(Node3D node)

@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using XGeneric.Weapons;
 
 public partial class WeaponSystem : Node3D
@@ -11,10 +10,18 @@ public partial class WeaponSystem : Node3D
 
 	public override void _Process(double delta)
 	{
+		if(currentWeapon == null)
+			return;
+		
 		if(Input.IsActionJustPressed("Click"))
 		{
 			currentWeapon.UseWeapon(GetParent() as Node3D);
 		}
+	}
+	
+	public void ChangeWeapon(Weapon newWeapon)
+	{
+		currentWeapon = newWeapon;
 	}
 
 }

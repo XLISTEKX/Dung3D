@@ -8,7 +8,7 @@ namespace XGeneric.Inventory
 		public EQ eq = new (3);
 		public int size;
 		
-		public uint cash = 1000;
+		public uint cash = 333;
 
 		public Inventory(int InventorySize)
 		{
@@ -53,7 +53,6 @@ namespace XGeneric.Inventory
 		public void UnEquipItem(int eqID, int slotID)
 		{
 			(eq.EQSlots[eqID], items[slotID]) = (items[slotID], eq.EQSlots[eqID]);
-			
 		}
 	}
 }

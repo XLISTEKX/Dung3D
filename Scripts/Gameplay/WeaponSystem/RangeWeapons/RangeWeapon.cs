@@ -22,12 +22,11 @@ namespace XGeneric.Weapons
 			
 			direction -= user.GlobalPosition;
 			direction.Y = 0;
+			
 			WeaponProjectile projectile = Projectile.Instantiate<WeaponProjectile>();
 			user.GetNode("/root").AddChild(projectile);
 			projectile.GlobalPosition = user.GlobalPosition + projectileSpawnTransform;
-			projectile.InitProjectile(direction, (user as CharacterBody3D).Velocity);
-			
-			
+			projectile.InitProjectile(direction, Damage);
 		}
 		
 	} 

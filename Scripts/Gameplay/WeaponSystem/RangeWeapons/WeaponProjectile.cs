@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace XGeneric.Weapons
@@ -5,38 +6,46 @@ namespace XGeneric.Weapons
 	public partial class WeaponProjectile : RigidBody3D
 	{
 		[Export] float speed;
+		[Export] float LifeTime;
+		
+		int Damage;
 		
 		bool canMove = false;
-		Vector3 moveDirection, playerVelocty;
+		Vector3 moveDirection;
 		
-		public void InitProjectile(Vector3 direction, Vector3 velocity)
+		public void InitProjectile(Vector3 direction, int damage)
 		{
+			Damage = damage;
 			moveDirection = direction;
-			playerVelocty = velocity;
 			canMove = true;
 			
 			Timer timer = new()
 			{
-				WaitTime = 2f
+				WaitTime = LifeTime
 			};
 			AddChild(timer);
 			timer.Timeout += DestroyParticle;
 			timer.Start();
-		}
-
-		public override void _PhysicsProcess(double delta)
-		{
-			if(!canMove)
-				return;
-			moveDirection = moveDirection.Normalized();
-			moveDirection *= (float)delta * speed;
 			
-			MoveAndCollide(moveDirection);
+			LinearVelocity = direction.Normalized() * speed;
 		}
-		
 		public void On_body_entered(Node node)
 		{
-			GD.Print(node.Name);
+			List<Node> nodes = new()
+			{
+				node	
+			};
+			nodes.AddRange(node.GetChildren());
+			
+			foreach(Node child in nodes)
+			{
+				if(child is HealthSystem health)
+				{
+					health.TakeDamage(Damage);
+					break;
+				}
+			}
+			QueueFree();
 		}
 		
 		void DestroyParticle()

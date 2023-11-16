@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RangeWeapon" load_steps=4 format=3 uid="uid://dpwyxlym4l3u8"]
+
+[ext_resource type="Texture2D" uid="uid://d333bruwil1q3" path="res://Sprites/Sprite_Coin.png" id="1_7oah3"]
+[ext_resource type="PackedScene" uid="uid://de37iyijkw5yj" path="res://Prefabs/Items/World/Weapons/projectile.tscn" id="2_7s8bm"]
+[ext_resource type="Script" path="res://Scripts/Gameplay/WeaponSystem/RangeWeapons/RangeWeapon.cs" id="3_320wu"]
+
+[resource]
+script = ExtResource("3_320wu")
+Damage = 10
+Projectile = ExtResource("2_7s8bm")
+weaponType = 0
+ID = 3
+Name = "A"
+ItemIcon = ExtResource("1_7oah3")
+rarity = 4
