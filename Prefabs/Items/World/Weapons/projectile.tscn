@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://de37iyijkw5yj"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/WeaponSystem/RangeWeapons/WeaponProjectile.cs" id="1_xbp4w"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_621t0"]
+radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05cxu"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_r47rv"]
+material = SubResource("StandardMaterial3D_05cxu")
+radius = 0.2
+height = 0.4
+
+[node name="Projectile" type="RigidBody3D"]
+collision_layer = 12
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_xbp4w")
+speed = 20.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_621t0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_r47rv")
+
+[connection signal="body_entered" from="." to="." method="On_body_entered"]

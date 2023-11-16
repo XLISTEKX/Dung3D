@@ -39,15 +39,6 @@ public partial class InventoryUI : CustomInventoryUI
 			}
 		}
 	}
-	
-	public void ReloadSlots()
-	{
-		for(int i = 0; i < slotTransform.GetChildCount(); i++)
-		{
-			slotTransform.GetChild<Slot>(i).UpdateSlot(inventory.items[i]);
-		}
-	}
-	
 	public override void BeginDrag(Slot initSlot)
 	{
 		isDraging = true;
