@@ -13,3 +13,4 @@ ID = 3
 Name = "A"
 ItemIcon = ExtResource("1_7oah3")
 rarity = 4
+itemType = 1

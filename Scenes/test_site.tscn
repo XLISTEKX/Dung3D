@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b3ra6chicawpd"]
+[gd_scene load_steps=30 format=3 uid="uid://b3ra6chicawpd"]
 
 [ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="1_xa4d3"]
 [ext_resource type="Script" path="res://Scripts/UI/UIManager.cs" id="2_jvsvf"]
@@ -15,6 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://c25wx5tcdsgv0" path="res://Assets/Environment/Stuff/Cardboard.glb" id="8_tgbxs"]
 [ext_resource type="PackedScene" uid="uid://dsx67vggol7h" path="res://Prefabs/Items/World/test_item.tscn" id="13_lhep3"]
 [ext_resource type="PackedScene" uid="uid://w28dfgynbfx5" path="res://Prefabs/chest.tscn" id="14_miwkr"]
+[ext_resource type="Resource" uid="uid://dhq262nr512fd" path="res://Prefabs/Items/Item(0).tres" id="16_hg6jh"]
+[ext_resource type="Resource" uid="uid://dst8i5u2jkris" path="res://Prefabs/Items/Item(1).tres" id="17_y7nxt"]
+[ext_resource type="Resource" uid="uid://dpwyxlym4l3u8" path="res://Prefabs/Items/Item(2).tres" id="18_g4isi"]
+[ext_resource type="Resource" uid="uid://ymn8anu8fj4t" path="res://Prefabs/Items/Item(3).tres" id="19_xdet3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e5rq8"]
 font = ExtResource("2_xllyw")
@@ -244,5 +248,6 @@ transform = Transform3D(0.83663, 0, 0.547768, 0, 1, 0, -0.547768, 0, 0.83663, -2
 
 [node name="Chest" parent="." instance=ExtResource("14_miwkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.492702, 6)
+items = Array[Resource]([ExtResource("16_hg6jh"), ExtResource("17_y7nxt"), ExtResource("18_g4isi"), ExtResource("19_xdet3")])
 
 [connection signal="pressed" from="UI/Gameplay/InvButton" to="UI" method="OpenPlayerInventory"]

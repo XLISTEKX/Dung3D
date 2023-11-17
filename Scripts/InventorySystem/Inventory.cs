@@ -5,17 +5,19 @@ namespace XGeneric.Inventory
 	public class Inventory
 	{
 		public InvItem[] items;
-		public EQ eq = new (3);
+		public EQ eq;
 		public int size;
 		
 		public uint cash = 333;
 
-		public Inventory(int InventorySize)
+		public Inventory(int InventorySize, EQ InventoryEQ = null)
 		{
 			items = new InvItem[InventorySize];
 			size = InventorySize;
+			
+			eq = InventoryEQ;
 		}
-		//Adds item to inventory (Returns item ID)
+		//Adds item to inventory (Returns item ID) if return < 0 -> no space
 		public int AddItem(InvItem itemToAdd)
 		{
 			for(int i = 0; i < size; i++)
@@ -45,9 +47,14 @@ namespace XGeneric.Inventory
 			(inventory.items[secIDsecInventory], items[firstItemID]) = (items[firstItemID], inventory.items[secIDsecInventory]);
 		}
 		
-		public void EquipItem(int itemID, int eqID)
+		public bool EquipItem(int itemID, int eqID)
 		{
+			if(items[itemID].itemType != eq.eqSlotsTypes[eqID])
+				return false;
+				
 			(eq.EQSlots[eqID], items[itemID]) = (items[itemID], eq.EQSlots[eqID]);
+			
+			return true;
 		}
 		
 		public void UnEquipItem(int eqID, int slotID)

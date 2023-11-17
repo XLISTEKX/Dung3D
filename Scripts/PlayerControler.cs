@@ -36,7 +36,15 @@ public partial class PlayerControler : Node3D, HealthSystem, IInventory, IIntera
 		health = maxHealth;
 		uIGameplay.InitUI(this);
 		
-		playerInventory = new(30);
+		InvItem[] invs = new InvItem[3];
+		ItemType[] types = new ItemType[]
+		{
+			ItemType.Weapon,
+			ItemType.Weapon,
+			ItemType.Weapon
+		};
+		
+		playerInventory = new(30, new EQ(invs, types));
 		playerInventory.AddItem(InventorySystem.GetItemByID(0));
 		playerInventory.AddItem(InventorySystem.GetItemByID(1));
 		
@@ -45,7 +53,7 @@ public partial class PlayerControler : Node3D, HealthSystem, IInventory, IIntera
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if(@event is InputEventKey key && key.KeyLabel == Key.E && key.Pressed)
+		if(Input.IsActionJustPressed("Use"))
 		{
 			if(interactItems == null)
 				return;

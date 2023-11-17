@@ -13,3 +13,4 @@ ID = 3
 Name = "TestWeapon"
 ItemIcon = ExtResource("1_2aow3")
 rarity = 4
+itemType = 1

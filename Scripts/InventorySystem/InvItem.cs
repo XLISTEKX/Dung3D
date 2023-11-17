@@ -1,8 +1,15 @@
 using Godot;
-using System;
 
 namespace XGeneric.Inventory
 {
+	public enum ItemType
+	{
+		None = 0,
+		Weapon = 1,
+		Useable = 2,
+		
+	}
+	
 	[GlobalClass][Tool]
 	public partial class InvItem : Resource
 	{
@@ -11,6 +18,7 @@ namespace XGeneric.Inventory
 		[Export] public Texture2D ItemIcon;
 		[Export] public PackedScene InWorldItem;
 		[Export] public RarityTypes rarity;
+		[Export] public ItemType itemType;
 		
 	}
 }

@@ -111,22 +111,28 @@ public partial class InventoryUI : CustomInventoryUI
 					inventory.UnEquipItem(initID, hoveredSlot.slotID);
 					initItem = inventory.eq.EQSlots[initID];
 					hoveredItem = inventory.items[hoveredSlot.slotID];
-					if(hoveredItem is Weapon weapon1)
+					if(hoveredItem is Weapon weapon)
 					{
-						(GetTree().GetFirstNodeInGroup("Player").FindChild("WeaponSystem") as WeaponSystem).ChangeWeapon(null);
+						(GetTree().GetFirstNodeInGroup("Player").FindChild("WeaponSystem") as WeaponSystem).RemoveWeapon(weapon);
 					}
 					
 				break;
 				
 				case (>= 0, < 0):
-					inventory.EquipItem(initSlot.slotID, hoverID);
+					if(!inventory.EquipItem(initSlot.slotID, hoverID))
+					{
+						hoveredSlot = null;
+						initSlot = null;
+						return;
+					}
+						
 					
 					initItem = inventory.items[initSlot.slotID];
 					hoveredItem = inventory.eq.EQSlots[hoverID];
 					
 					if(hoveredItem is Weapon weapon2)
 					{
-						(GetTree().GetFirstNodeInGroup("Player").FindChild("WeaponSystem") as WeaponSystem).ChangeWeapon(weapon2);
+						(GetTree().GetFirstNodeInGroup("Player").FindChild("WeaponSystem") as WeaponSystem).AddWeapon(weapon2);
 					}
 					
 				break;

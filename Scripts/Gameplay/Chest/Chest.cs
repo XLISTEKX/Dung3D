@@ -5,15 +5,20 @@ using XGeneric.System;
 
 public partial class Chest : Area3D, IInventory, IInteract
 {
+	[Export] Resource[] items;
 	Inventory inventory;
 
 	public override void _Ready()
 	{
 		inventory = new(10);
-		
-		inventory.AddItem(InventorySystem.GetItemByID(0));
-		inventory.AddItem(InventorySystem.GetItemByID(2));
-		inventory.AddItem(InventorySystem.GetItemByID(3));
+
+		foreach(Resource item in items)
+		{
+			if(item is InvItem temp)
+			{
+				inventory.AddItem(temp);
+			}
+		}
 	}
 
 	public void OnBodyEnter(Node3D node)

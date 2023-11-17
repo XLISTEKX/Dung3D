@@ -1,12 +1,16 @@
+using XGeneric.Weapons;
+
 namespace XGeneric.Inventory
 {
 	public class EQ
 	{
 		public InvItem[] EQSlots;
+		public ItemType[] eqSlotsTypes;
 		
-		public EQ(int slotsCount)
+		public EQ(InvItem[] eqSlots, ItemType[] itemTypes)
 		{
-			EQSlots = new InvItem[slotsCount];
+			EQSlots = eqSlots;
+			eqSlotsTypes = itemTypes;
 		}
 	}
 }
