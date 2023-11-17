@@ -4,12 +4,12 @@ using XGeneric.Inventory;
 using XGeneric.Statistic;
 using XGeneric.System;
 
-public partial class PlayerControler : Node3D, HealthSystem, IInventory, IInteractMain
+public partial class PlayerControler : Node3D, HealthSystem, IInventory, IInteractMain, IStats
 {
 	[Export] public float staminaMax = 10;
 	UIGameplay uIGameplay;
 	Inventory playerInventory;
-	public StatsSystem stats;
+	[Export] StatsSystem stats;
 
 	List<IInteract> interactItems;
 	
@@ -137,4 +137,9 @@ public partial class PlayerControler : Node3D, HealthSystem, IInventory, IIntera
 			interactItems = null;
 	}
 	#endregion
+	
+	public StatsSystem GetStats()
+    {
+        return stats;
+    }
 }

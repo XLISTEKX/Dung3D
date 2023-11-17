@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cxxehy12xcth6"]
+[gd_scene load_steps=21 format=3 uid="uid://cxxehy12xcth6"]
 
 [ext_resource type="Script" path="res://Scripts/UI/InventoryUI.cs" id="1_a6k78"]
 [ext_resource type="PackedScene" uid="uid://bdob34khy1ag0" path="res://Prefabs/UI/slot.tscn" id="2_ntwwv"]
@@ -50,9 +50,19 @@ bg_color = Color(1, 1, 1, 0.196078)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbxj4"]
 bg_color = Color(0, 1, 0, 1)
 
-[node name="InventoryUI" type="CanvasLayer" node_paths=PackedStringArray("cashLabel", "playerEQSlot1", "playerEQSlot2", "playerEQSlot3", "slotTransform")]
+[sub_resource type="LabelSettings" id="LabelSettings_e6lem"]
+font = ExtResource("4_ibcdg")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_b33xj"]
+font = ExtResource("5_lfrs7")
+font_size = 20
+
+[node name="InventoryUI" type="CanvasLayer" node_paths=PackedStringArray("cashLabel", "ADInfoLabel", "ArmorInfoLabel", "playerEQSlot1", "playerEQSlot2", "playerEQSlot3", "slotTransform")]
 script = ExtResource("1_a6k78")
 cashLabel = NodePath("TopPanel/HBoxContainer/HBoxContainer/Label")
+ADInfoLabel = NodePath("ColorRect/ColorRect/VBoxContainer/Label2")
+ArmorInfoLabel = NodePath("ColorRect/ColorRect/VBoxContainer/Label3")
 playerEQSlot1 = NodePath("ColorRect/Slot")
 playerEQSlot2 = NodePath("ColorRect/Slot2")
 playerEQSlot3 = NodePath("ColorRect/Slot3")
@@ -224,6 +234,7 @@ anchor_left = 0.65
 anchor_top = 0.15
 anchor_right = 0.95
 anchor_bottom = 0.9
+mouse_filter = 1
 color = Color(1, 1, 1, 0)
 
 [node name="Slot" parent="ColorRect" instance=ExtResource("2_ntwwv")]
@@ -262,3 +273,49 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.75
+color = Color(0, 0, 0, 0.54902)
+
+[node name="Label" type="Label" parent="ColorRect/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.15
+grow_horizontal = 2
+text = "INFO"
+label_settings = SubResource("LabelSettings_e6lem")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="ColorRect/ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "ATACK DAMAGE: "
+label_settings = SubResource("LabelSettings_b33xj")
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="ColorRect/ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "ARMOR:"
+label_settings = SubResource("LabelSettings_b33xj")
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="ColorRect/ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "_ph"
+label_settings = SubResource("LabelSettings_b33xj")
+vertical_alignment = 1

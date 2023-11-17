@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StatsSystem" load_steps=2 format=3 uid="uid://bfxdk3xsp02rv"]
+
+[ext_resource type="Script" path="res://Scripts/StatsSystem/StatsSystem.cs" id="1_wl7m3"]
+
+[resource]
+script = ExtResource("1_wl7m3")
+attackDamage = 10
+Armor = 2

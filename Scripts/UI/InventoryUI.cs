@@ -1,10 +1,11 @@
 using Godot;
 using XGeneric.Inventory;
+using XGeneric.Statistic;
 using XGeneric.Weapons;
 
 public partial class InventoryUI : CustomInventoryUI
 {
-	[Export] Label cashLabel;
+	[Export] Label cashLabel, ADInfoLabel, ArmorInfoLabel;
 	
 	[Export] Slot playerEQSlot1, playerEQSlot2, playerEQSlot3;
 	
@@ -25,6 +26,11 @@ public partial class InventoryUI : CustomInventoryUI
 		playerEQSlot1.InitSlot(inventory.eq.EQSlots[0], this, -1);
 		playerEQSlot2.InitSlot(inventory.eq.EQSlots[1], this, -2);
 		playerEQSlot3.InitSlot(inventory.eq.EQSlots[2], this, -3);
+		
+		StatsSystem stats = (initNode as IStats).GetStats();
+		
+		ADInfoLabel.Text = "ATTACK DAMAGE: " + stats.attackDamage;
+		ArmorInfoLabel.Text = "ARMOR: " + stats.Armor;
 	}
 	public override void _Input(InputEvent @event)
 	{

@@ -38,7 +38,7 @@ public partial class UIManager : CanvasLayer
 		allLayers[0].Visible = false;
 		allLayers.Add(inventory);
 		
-		inventory.InitInventory(playerControler.GetInventory());
+		inventory.InitInventory(playerControler.GetInventory(), playerControler);
 	}
 	
 	public bool OpenCustomInventory(Inventory inventory, Node3D initNode = null)
