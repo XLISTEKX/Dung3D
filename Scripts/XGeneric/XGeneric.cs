@@ -18,5 +18,19 @@ namespace XGeneric.Utilities
 			
 			return (Vector3) rayArray["position"];
 		}
+		
+		public static T GetScriptInNode<T>(Node3D node)
+		{
+			if(node is T t)
+				return t;
+			
+			foreach(Node nodeS in node.GetChildren())
+			{
+				if(nodeS is T temp)
+					return temp;
+			}
+			
+			return default;
+		}
 	}
 }
