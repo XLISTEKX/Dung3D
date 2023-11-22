@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b3ra6chicawpd"]
+[gd_scene load_steps=31 format=3 uid="uid://b3ra6chicawpd"]
 
 [ext_resource type="Script" path="res://Scripts/UIGameplay.cs" id="1_xa4d3"]
 [ext_resource type="Script" path="res://Scripts/UI/UIManager.cs" id="2_jvsvf"]
@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://dst8i5u2jkris" path="res://Prefabs/Items/Item(1).tres" id="17_y7nxt"]
 [ext_resource type="Resource" uid="uid://dpwyxlym4l3u8" path="res://Prefabs/Items/Item(2).tres" id="18_g4isi"]
 [ext_resource type="Resource" uid="uid://ymn8anu8fj4t" path="res://Prefabs/Items/Item(3).tres" id="19_xdet3"]
+[ext_resource type="PackedScene" uid="uid://c6ph474wkfs4r" path="res://Prefabs/spawner.tscn" id="20_04i34"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e5rq8"]
 font = ExtResource("2_xllyw")
@@ -249,5 +250,9 @@ transform = Transform3D(0.83663, 0, 0.547768, 0, 1, 0, -0.547768, 0, 0.83663, -2
 [node name="Chest" parent="." instance=ExtResource("14_miwkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.492702, 6)
 items = Array[Resource]([ExtResource("16_hg6jh"), ExtResource("17_y7nxt"), ExtResource("18_g4isi"), ExtResource("19_xdet3")])
+
+[node name="Spawner" parent="." instance=ExtResource("20_04i34")]
+transform = Transform3D(0.999997, -0.00237365, 0, 0.00237365, 0.999997, 0, 0, 0, 1, 27.7034, 2.89228, 16.5451)
+spawnTime = 10.0
 
 [connection signal="pressed" from="UI/Gameplay/InvButton" to="UI" method="OpenPlayerInventory"]

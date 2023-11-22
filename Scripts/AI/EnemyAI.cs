@@ -1,9 +1,11 @@
 using Godot;
+using XGeneric.Statics;
 using XGeneric.Utilities;
 
 public partial class EnemyAI : CharacterBody3D, HealthSystem
 {
 	[Export] float timeToLook = 1;
+	[Export] float attackRange = 1f;
 	[Export] float movementSpeed = 10;
 	[Export] AnimationTree tree;
 	Node3D target;
@@ -11,7 +13,7 @@ public partial class EnemyAI : CharacterBody3D, HealthSystem
 	Timer timer;
 	int health = 5;
 	
-	bool dead = false;
+	bool dead = false, canMove = true, canAttack = false;
 	
 	public int Health 
 	{
@@ -30,16 +32,19 @@ public partial class EnemyAI : CharacterBody3D, HealthSystem
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if(dead)
+		if(dead || !canMove)
 			return;
 		
 		Vector3 moveDirection = targetPosition - GlobalPosition;
 		
-		if(moveDirection.Length() <= 0.75f)
+		if(moveDirection.Length() <= attackRange)
 		{
 			moveDirection = Vector3.Zero;
-			tree.Set("parameters/conditions/isIdle", true);
+			tree.Set("parameters/conditions/inAttackRange", true);
 			tree.Set("parameters/conditions/isWalking", false);
+			canMove = false;
+			
+			Rotation = new(0,MathV.GetAngleToVector(target.GlobalPosition, GlobalPosition),0);
 		}
 		else
 		{
@@ -47,15 +52,15 @@ public partial class EnemyAI : CharacterBody3D, HealthSystem
 			moveDirection *= movementSpeed;
 			moveDirection.Y = 0;
 			
-			tree.Set("parameters/conditions/isIdle", false);
+			//tree.Set("parameters/conditions/isIdle", false);
 			tree.Set("parameters/conditions/isWalking", true);
 		}
-		
-		//MoveAndCollide(moveDirection * (float)delta);
-		
+		moveDirection.Y = -9.87f;
 		Velocity = moveDirection;
-		MoveAndSlide();
+		
 		RotateBody((float) delta);
+		MoveAndSlide();
+		
 	}
 
 	public void SetUpTimer()
@@ -100,8 +105,36 @@ public partial class EnemyAI : CharacterBody3D, HealthSystem
 	
 	public void AnimFinish(string animName)
 	{
-		if(animName == "death")
-			QueueFree();
+		switch(animName)
+		{
+			case "death":
+				QueueFree();
+			break;
+			case "attack1":
+				canAttack = true;
+				if((targetPosition - GlobalPosition).Length() >= attackRange)
+				{
+					tree.Set("parameters/conditions/inAttackRange", false);
+					tree.Set("parameters/conditions/isWalking", true);
+					canMove = true;
+				}
+				else
+				{
+					Rotation = new(0,MathV.GetAngleToVector(target.GlobalPosition, GlobalPosition),0);
+				}
+			break;
+		}
 	}
 
+	public void HitEnemy(Node3D body)
+	{
+		if(!canAttack)
+			return;
+		
+		if(XStatic.GetScriptInNode(body, out HealthSystem healthSystem))
+		{
+			healthSystem.TakeDamage(10);
+			canAttack = false;
+		}
+	}
 }

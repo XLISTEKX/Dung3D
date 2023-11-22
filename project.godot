@@ -77,6 +77,8 @@ Inventory={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Items"
 3d_physics/layer_4="NPC"
+3d_physics/layer_5="PlayerHitbox"
+3d_physics/layer_6="Hitbox"
 
 [navigation]
 

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6ph474wkfs4r"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/Spawner/Spawner.cs" id="1_oqyfj"]
+[ext_resource type="PackedScene" uid="uid://ds1dbnfxbj8xh" path="res://Prefabs/Enemy/stephen.tscn" id="2_rps5t"]
+
+[node name="Spawner" type="Node3D"]
+script = ExtResource("1_oqyfj")
+mob = ExtResource("2_rps5t")
+spawnTime = 1.0
